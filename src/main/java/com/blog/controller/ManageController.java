@@ -18,6 +18,6 @@ public class ManageController {
 
     @RequestMapping(value = "article" , method = RequestMethod.GET)
     public String articleManage() {
-        return "manage/article";
+        return "manage/postlist";
     }
 }
