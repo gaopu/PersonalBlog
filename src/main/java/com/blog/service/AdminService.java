@@ -2,8 +2,10 @@ package com.blog.service;
 
 import com.blog.dao.AdminDao;
 import com.blog.po.Admin;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 
 /**
@@ -11,10 +13,13 @@ import java.io.IOException;
  */
 @Service
 public class AdminService {
+
+    @Autowired
+    private AdminDao adminDao;
     //判断帐号和密码是否正确
     public boolean isCorrect(String email,String passwd) throws IOException {
         //从数据库根据邮箱帐号取出管理员帐号信息
-        Admin admin = new AdminDao().selectAdmin(email);
+        Admin admin = adminDao.selectAdmin(email);
         if (admin != null && admin.getPasswd().equals(passwd)) {
             return true;
         }
@@ -23,7 +28,7 @@ public class AdminService {
 
     public String getNickName(String email) throws IOException {
         //从数据库根据邮箱帐号取出管理员帐号信息
-        Admin admin = new AdminDao().selectAdmin(email);
+        Admin admin = adminDao.selectAdmin(email);
         if (admin != null) {
             return admin.getNickName();
         }
