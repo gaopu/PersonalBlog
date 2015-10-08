@@ -13,4 +13,8 @@
             </dataSource>
         </environment>
     </environments>
+
+    <mappers>
+        <package name="com.blog.mapper"/>
+    </mappers>
 </configuration>

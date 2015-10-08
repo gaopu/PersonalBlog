@@ -15,4 +15,10 @@
 		<servlet-name>mvc-dispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+
+    <!-- 404页面-->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/pages/404.jsp</location>
+    </error-page>
 </web-app>
