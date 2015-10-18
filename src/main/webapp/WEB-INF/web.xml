@@ -21,4 +21,25 @@
         <error-code>404</error-code>
         <location>/WEB-INF/pages/404.jsp</location>
     </error-page>
+
+    <!-- 首页-->
+    <welcome-file-list>
+        <welcome-file>/index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!-- 字符编码过滤器开始-->
+    <filter>
+        <filter-name>EncodingFilter</filter-name>
+        <filter-class>com.blog.Filter.EncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- 字符编码过滤器结束-->
 </web-app>

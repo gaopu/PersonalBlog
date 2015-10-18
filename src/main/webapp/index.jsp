@@ -12,6 +12,7 @@
 </head>
 <body>
 这里是首页.
-<a href="login">管理员登录</a>
+<a href="${pageContext.request.contextPath}/login">管理员登录</a>
+<a href="${pageContext.request.contextPath}/manage/post">已经等录?发表博文</a>
 </body>
 </html>

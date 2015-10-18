@@ -11,6 +11,7 @@
     <title></title>
 </head>
 <body>
-成功登录,这里是后台首页
+成功登录,这里是后台首页<br>
+<a href="${pageContext.request.contextPath}/">首页</a>
 </body>
 </html>

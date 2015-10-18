@@ -1,6 +1,7 @@
 package com.blog.mapper;
 
 import com.blog.po.Admin;
+import com.blog.po.Article;
 import org.apache.ibatis.annotations.Select;
 
 /**
@@ -8,5 +9,5 @@ import org.apache.ibatis.annotations.Select;
  */
 public interface AdminMapper {
     @Select("select * from admin where email = #{email}")
-    Admin selectAdmin(String email);
+    Admin getAdmin(String email);
 }

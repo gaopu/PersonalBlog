@@ -4,10 +4,10 @@ package com.blog.po;
  * Created by geekgao on 2015/10/5.
  */
 public class Admin {
-    int id;
-    String nickName;
-    String eamil;
-    String passwd;
+    private int id;
+    private String nickName;
+    private String eamil;
+    private String passwd;
 
     public int getId() {
         return id;
