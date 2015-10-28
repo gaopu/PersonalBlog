@@ -1,6 +1,5 @@
 package com.blog.controller;
 
-import com.blog.po.Admin;
 import com.blog.po.Article;
 import com.blog.service.AdminService;
 import com.blog.service.ArticleService;
@@ -11,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by geekgao on 15-10-28.

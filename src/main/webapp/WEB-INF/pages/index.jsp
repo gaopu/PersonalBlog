@@ -16,7 +16,7 @@
 <br>
 文章预览:<br>
 <c:forEach items="${articles}" var="article">
-    题目:${article.title}<br>
+    题目:<a href="${pageContext.request.contextPath}/article?id=${article.id}">${article.title}</a><br>
     作者:${id_nickname[article.author_Id]}<br>
     发表时间:${article.time}<br>
     <br>
