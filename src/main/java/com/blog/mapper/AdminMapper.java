@@ -10,4 +10,7 @@ import org.apache.ibatis.annotations.Select;
 public interface AdminMapper {
     @Select("select * from admin where email = #{email}")
     Admin getAdmin(String email);
+
+    @Select("select * from admin where id = #{id}")
+    Admin getAdminById(int id);
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by geekgao on 15-10-12.
@@ -54,5 +55,10 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public int getLatestId() throws IOException {
         return articleDao.getLatestId();
+    }
+
+    @Override
+    public List<Article> getCommonArticle() throws IOException {
+        return articleDao.getCommonArticle();
     }
 }

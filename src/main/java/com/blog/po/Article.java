@@ -7,27 +7,27 @@ import java.util.Date;
  */
 public class Article {
     private int id;
-    private int authorId;
+    private int author_Id;
     private String title;
     private Date time;
-    private int readNum;
-    private int commentNum;
+    private int read_Num;
+    private int comment_Num;
     private String deleted;
 
     public Article() {
     }
 
-    public Article(int authorId, String title, Date time, int readNum, int commentNum, String deleted) {
-
-        this.authorId = authorId;
+    public Article(int author_Id, String title, Date time, int read_Num, int comment_Num, String deleted) {
+        this.author_Id = author_Id;
         this.title = title;
         this.time = time;
-        this.readNum = readNum;
-        this.commentNum = commentNum;
+        this.read_Num = read_Num;
+        this.comment_Num = comment_Num;
         this.deleted = deleted;
     }
 
     public int getId() {
+
         return id;
     }
 
@@ -35,12 +35,12 @@ public class Article {
         this.id = id;
     }
 
-    public int getAuthorId() {
-        return authorId;
+    public int getAuthor_Id() {
+        return author_Id;
     }
 
-    public void setAuthorId(int authorId) {
-        this.authorId = authorId;
+    public void setAuthor_Id(int author_Id) {
+        this.author_Id = author_Id;
     }
 
     public String getTitle() {
@@ -59,20 +59,20 @@ public class Article {
         this.time = time;
     }
 
-    public int getReadNum() {
-        return readNum;
+    public int getRead_Num() {
+        return read_Num;
     }
 
-    public void setReadNum(int readNum) {
-        this.readNum = readNum;
+    public void setRead_Num(int read_Num) {
+        this.read_Num = read_Num;
     }
 
-    public int getCommentNum() {
-        return commentNum;
+    public int getComment_Num() {
+        return comment_Num;
     }
 
-    public void setCommentNum(int commentNum) {
-        this.commentNum = commentNum;
+    public void setComment_Num(int comment_Num) {
+        this.comment_Num = comment_Num;
     }
 
     public String getDeleted() {

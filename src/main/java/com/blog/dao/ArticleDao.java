@@ -4,6 +4,7 @@ import com.blog.po.Article;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by geekgao on 15-10-12.
@@ -16,6 +17,12 @@ public interface ArticleDao {
     int getLatestId() throws IOException;
 
     int getAuthorId(int id) throws IOException;
+
+    /**
+     * 获取没有被删除的正常文章
+     * @return
+     */
+    List<Article> getCommonArticle() throws IOException;
 
     String getTitle(int id) throws IOException;
 

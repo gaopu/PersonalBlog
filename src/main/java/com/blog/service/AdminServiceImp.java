@@ -11,7 +11,6 @@ import java.io.IOException;
  */
 @Service
 public class AdminServiceImp implements AdminService {
-
     @Autowired
     private AdminDao adminDao;
 
@@ -23,6 +22,11 @@ public class AdminServiceImp implements AdminService {
     @Override
     public String getNickName(String email) throws IOException {
         return adminDao.getNickName(email);
+    }
+
+    @Override
+    public String getNickName(int id) throws IOException {
+        return adminDao.getNickName(id);
     }
 
     @Override

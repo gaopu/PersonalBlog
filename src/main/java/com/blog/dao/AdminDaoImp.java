@@ -27,6 +27,17 @@ public class AdminDaoImp implements AdminDao {
         return admin;
     }
 
+    public Admin getAdmin(int id) throws IOException {
+        SqlSession session = MybatisUtils.getSession();
+        try {
+            AdminMapper mapper = session.getMapper(AdminMapper.class);
+            admin = mapper.getAdminById(id);
+        } finally {
+            session.close();
+        }
+        return admin;
+    }
+
     public String getNickName(String email) throws IOException {
         //从数据库根据邮箱帐号取出管理员帐号信息
         admin = getAdmin(email);
@@ -50,6 +61,16 @@ public class AdminDaoImp implements AdminDao {
         admin = getAdmin(email);
         if (admin != null) {
             return admin.getPasswd();
+        }
+        return null;
+    }
+
+    @Override
+    public String getNickName(int id) throws IOException {
+        //从数据库根据邮箱帐号取出管理员帐号信息
+        admin = getAdmin(id);
+        if (admin != null) {
+            return admin.getNickName();
         }
         return null;
     }

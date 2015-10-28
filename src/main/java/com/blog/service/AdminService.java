@@ -11,6 +11,8 @@ public interface AdminService {
 
     String getNickName(String email) throws IOException;
 
+    String getNickName(int id) throws IOException;
+
     int getId(String email) throws IOException;
 
     String getPasswd(String email) throws IOException;

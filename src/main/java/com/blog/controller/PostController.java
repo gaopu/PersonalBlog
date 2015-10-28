@@ -47,6 +47,7 @@ public class PostController {
         if (level != null && level.equals("0")) {
             Date nowTime = new Date(System.currentTimeMillis());
 
+            //确保获得到的最新存储的文章id和内容一致
             synchronized (PostController.class) {
                 articleService.insert(new Article((Integer) session.getAttribute("id"),title,nowTime,0,0,"n"));
                 //获得刚存储的文章的id

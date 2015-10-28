@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by geekgao on 15-10-12.
@@ -38,9 +40,21 @@ public class ArticleDaoImpl implements ArticleDao {
     }
 
     @Override
+    public List<Article> getCommonArticle() throws IOException {
+        SqlSession session = MybatisUtils.getSession();
+
+        try {
+            ArticleMapper mapper = session.getMapper(ArticleMapper.class);
+            return mapper.getCommonArticle();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
     public int getAuthorId(int id) throws IOException {
         article = getArticle(id);
-        return article.getAuthorId();
+        return article.getAuthor_Id();
     }
 
     @Override
@@ -58,13 +72,13 @@ public class ArticleDaoImpl implements ArticleDao {
     @Override
     public int getReadNum(int id) throws IOException {
         article = getArticle(id);
-        return article.getReadNum();
+        return article.getRead_Num();
     }
 
     @Override
     public int getCommentNum(int id) throws IOException {
         article = getArticle(id);
-        return article.getCommentNum();
+        return article.getComment_Num();
     }
 
     @Override

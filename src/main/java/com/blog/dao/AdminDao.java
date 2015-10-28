@@ -10,9 +10,13 @@ import java.io.IOException;
 public interface AdminDao {
     Admin getAdmin(String email) throws IOException;
 
+    Admin getAdmin(int id) throws IOException;
+
     String getNickName(String email) throws IOException;
 
     int getId(String email) throws IOException;
 
     String getPasswd(String email) throws IOException;
+
+    String getNickName(int id) throws IOException;
 }

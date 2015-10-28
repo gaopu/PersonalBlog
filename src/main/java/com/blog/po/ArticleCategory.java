@@ -4,30 +4,30 @@ package com.blog.po;
  * Created by geekgao on 15-10-18.
  */
 public class ArticleCategory {
-    int articleId;
-    int categoryId;
+    int article_Id;
+    int category_Id;
 
     public ArticleCategory() {
     }
 
-    public ArticleCategory(int articleId, int categoryId) {
-        this.articleId = articleId;
-        this.categoryId = categoryId;
+    public ArticleCategory(int article_Id, int category_Id) {
+        this.article_Id = article_Id;
+        this.category_Id = category_Id;
     }
 
-    public int getArticleId() {
-        return articleId;
+    public int getArticle_Id() {
+        return article_Id;
     }
 
-    public void setArticleId(int articleId) {
-        this.articleId = articleId;
+    public void setArticle_Id(int article_Id) {
+        this.article_Id = article_Id;
     }
 
-    public int getCategoryId() {
-        return categoryId;
+    public int getCategory_Id() {
+        return category_Id;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory_Id(int category_Id) {
+        this.category_Id = category_Id;
     }
 }
