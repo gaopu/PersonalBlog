@@ -12,7 +12,7 @@
 </head>
 <body>
 <h1>请登录:</h1>
-<form method="post" action="loginVerify">
+<form method="post" action="${pageContext.request.contextPath}/loginVerify">
     邮箱:<input name="email"/><br/>
     密码:<input name="passwd"/><br/>
     <input type="submit"/>

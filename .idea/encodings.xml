@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/src/main/java/com/blog/controller/用前删除" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/blog/dao/用前删除" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/blog/mapper/用前删除" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/blog/po/用前删除" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/blog/service/用前删除" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/用前删除" charset="GBK" />
+  <component name="Encoding" native2AsciiForPropertiesFiles="true">
     <file url="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/resources/css/用前删除" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/resources/js/用前删除" charset="GBK" />
+    <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

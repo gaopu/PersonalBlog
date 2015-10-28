@@ -19,7 +19,7 @@ public class MybatisUtils {
 
         //没有sessionFactory实例时，先生成
         if (sessionFactory == null) {
-            String resource = "mybatisConfig.xml";
+            String resource = "/mybatisConfig.xml";
             InputStream is;
             is = Resources.getResourceAsStream(resource);
             sessionFactory = new SqlSessionFactoryBuilder().build(is);
