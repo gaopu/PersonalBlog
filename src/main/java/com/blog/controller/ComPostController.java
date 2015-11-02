@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -25,20 +24,17 @@ public class ComPostController {
     private CommentService commentService;
 
     @RequestMapping(value = "editcomment" ,method = RequestMethod.POST)
-    public void editComment(HttpSession session,HttpServletResponse respone,@RequestParam("id") String id,@RequestParam("content") String content,@RequestParam("user_name") String user_name,@RequestParam("user_email") String user_email) throws IOException{
+    public void editComment(HttpServletResponse respone, @RequestParam("id") String id, @RequestParam("content") String content, @RequestParam("user_name") String user_name, @RequestParam("user_email") String user_email) throws IOException{
         if (content.equals("") || user_email.equals("") || user_name.equals("")) {
             respone.sendRedirect("article?id=" + id);
             return;
         }
         Integer idact = Integer.parseInt(id);
         Date curtime = new Date(System.currentTimeMillis());
-        System.out.println(curtime);
         synchronized (ComPostController.class){
-            System.out.println("user_email: "+user_email+"user_name: "+user_name+"content: "+content+"curent: "+curtime);
             //首先是对一篇文章的评论
             Comment commentpojo = new Comment(0,user_name,user_email,curtime,content,"a",idact,0);
             commentService.insertArt(commentpojo);
-            System.out.println(commentpojo);
         }
         respone.sendRedirect("article?id=" + id);
     }
@@ -52,13 +48,9 @@ public class ComPostController {
         }
         int idarc = Integer.parseInt(id);
         Date curtime = new Date(System.currentTimeMillis());
-        System.out.println("回复的时间：" + curtime);
         synchronized (ComPostController.class) {
-            System.out.println("回复者的信息:");
             Integer rcomment_id = Integer.parseInt(comment_id);
-            System.out.println("user_email: " + user_email + "user_name: " + user_name + "content: " + content + "curent: " + curtime+"comment_id"+comment_id);
             Comment commentpojo = new Comment(0,user_name,user_email,curtime,content,"c",idarc,rcomment_id);
-            System.out.println(commentpojo);
             commentService.insertCom(commentpojo);
         }
         respone.sendRedirect("article?id=" + id);

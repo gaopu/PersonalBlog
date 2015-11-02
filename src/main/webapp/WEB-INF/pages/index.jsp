@@ -23,5 +23,6 @@
 </c:forEach>
 <a href="${pageContext.request.contextPath}/login">管理员登录</a>
 <a href="${pageContext.request.contextPath}/manage/post">已经等录?发表博文</a>
+<a href="${pageContext.request.contextPath}/manage">后台管理</a>
 </body>
 </html>

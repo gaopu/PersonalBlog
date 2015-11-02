@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -44,8 +45,9 @@ public class LoginController {
      * @throws IOException
      */
     @RequestMapping(value = "loginVerify" , method = RequestMethod.POST)
-    public void verify(HttpSession session, HttpServletResponse response, @RequestParam("email") String email, @RequestParam("passwd") String passwd) throws IOException {
+    public @ResponseBody String verify(HttpSession session, HttpServletResponse response, @RequestParam("email") String email, @RequestParam("passwd") String passwd) throws IOException {
         //如果帐号信息正确,session中加入“已经等录,帐号等级,email帐号,昵称3条信息”
+        response.setContentType("text/html; charset=UTF-8");
         if (adminService.isCorrect(email,passwd)) {
             //标记是否登录
             session.setAttribute("flag","on");
@@ -53,10 +55,9 @@ public class LoginController {
             session.setAttribute("email",email);
             session.setAttribute("nickname",adminService.getNickName(email));
             session.setAttribute("id",adminService.getId(email));
-            response.sendRedirect("manage");
-            return;
+            return "success";
         } else {
-            response.sendRedirect("loginError");
+            return "用户名或密码错误!";
         }
     }
 
