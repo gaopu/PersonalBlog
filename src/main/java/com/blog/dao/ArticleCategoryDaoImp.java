@@ -24,4 +24,16 @@ public class ArticleCategoryDaoImp implements ArticleCategoryDao {
             session.close();
         }
     }
+
+    @Override
+    public void updateAfterDelCatrgory(String oldCategoryId, String newCategoryId) throws IOException {
+        SqlSession session = MybatisUtils.getSession();
+        try {
+            ArticleCategoryMapper mapper = session.getMapper(ArticleCategoryMapper.class);
+            mapper.updateAfterDelCatrgory(oldCategoryId, newCategoryId);
+            session.commit();
+        } finally {
+            session.close();
+        }
+    }
 }

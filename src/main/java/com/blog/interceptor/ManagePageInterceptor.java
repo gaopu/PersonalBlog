@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 public class ManagePageInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-            String flag = (String) request.getSession().getAttribute("flag");
-            if (flag != null && flag.equals("on")) {
-                return true;
-            }
+        String flag = (String) request.getSession().getAttribute("flag");
+        if (flag != null && flag.equals("on")) {
+            return true;
+        }
         return false;
     }
 }
