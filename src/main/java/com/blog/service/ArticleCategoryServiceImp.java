@@ -20,4 +20,14 @@ public class ArticleCategoryServiceImp implements ArticleCategoryService {
     public void insert(ArticleCategory articleCategory) throws IOException {
         articleCategoryDao.insert(articleCategory);
     }
+
+    @Override
+    public void updateAfterDelCatrgory(String oldCategoryId, String newCategoryId) throws IOException {
+        articleCategoryDao.updateAfterDelCatrgory(oldCategoryId,newCategoryId);
+    }
+
+    @Override
+    public int getCategoryId(int articleId) throws IOException {
+        return articleCategoryDao.getCategoryId(articleId);
+    }
 }

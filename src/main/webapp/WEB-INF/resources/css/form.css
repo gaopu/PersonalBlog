@@ -1,0 +1,128 @@
+.section_title {
+    border-top: 1px solid #ddd;
+    height: 1px;
+    margin: 40px 0;
+    position: relative;
+}
+ol {
+    display: block;
+    list-style-type: decimal;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+}
+#respond {
+    margin: 20px 0;
+}
+#commentform {
+    overflow: hidden;
+    border: 2px solid #eee;
+    padding: 10px 25px;
+    background: #f9f9f9;
+}
+.comment {
+    margin: 5px 0;
+    border-bottom: 1px dashed #eee;
+    overflow: hidden;
+    clear: both;
+    display: inline-block;
+}
+.comments_meta {
+    float: left;
+    width: 75px;
+    height: 65px;
+}
+.avatar_box {
+    width: 48px;
+    height: 48px;
+    padding: 3px;
+    border: 1px solid #ddd;
+}
+.comment_text {
+    float: left;
+    width: 575px;
+    padding: 0 0 10px 0;
+    font-size: 13px;
+    word-break: break-all;
+    overflow: hidden;
+}
+.comment_author_name {
+    color: #999;
+}
+.container{
+    display: none;
+}
+.comment-l {
+    float: left;
+    margin: 0 25px 0 0;
+    width: 347px;
+}
+#cancel-comment-reply {
+    display: block;
+    line-height: 28px;
+}
+.comment-r {
+    float: left;
+    width: 220px;
+    line-height: 28px;
+}
+#commentform label {
+    vertical-align: middle;
+}
+textarea {
+    resize: none;
+}
+textarea {
+    outline: 0;
+}
+.clear {
+    clear: both;
+}
+.comment-btn {
+    text-align: right;
+    height: 48px;
+    line-height: 48px;
+}
+.comment-btn input {
+    display: inline-block;
+}
+div {
+    display: block;
+}
+
+html, body, div, p, ul, ol, li, h1, h2, h3, h4, pre, form, p, button, img {
+    margin: 0;
+    padding: 0;
+}
+ul, li {
+    list-style-type: none;
+}
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+input {
+    -webkit-appearance: textfield;
+    padding: 1px;
+    background-color: white;
+    border: 2px inset;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    -webkit-rtl-ordering: logical;
+    -webkit-user-select: text;
+    cursor: auto;
+}
+.comment-r input {
+    width: 196px;
+    border: 2px solid #eee;
+    padding: 5px 10px;
+}
+#commentform input,
+#commentform label {
+    vertical-align: middle;
+}

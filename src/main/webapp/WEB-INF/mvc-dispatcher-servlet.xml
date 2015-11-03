@@ -19,4 +19,13 @@
             <bean class="com.blog.interceptor.ManagePageInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
+
+    <!-- 解决@ResponseBody配置后返回的中文乱码-->
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg value="UTF-8" />
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 </beans>

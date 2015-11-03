@@ -22,4 +22,26 @@ public interface CategoryService {
      * @return
      */
     List<Category> getAll() throws IOException;
+
+    /**
+     * 获取某分类下的文章数量
+     * @param categoryId 分类id
+     * @return
+     */
+    int getArticleCountByCategoryId(int categoryId) throws IOException;
+
+    /**
+     * 检测类型是否存在
+     * @param name 类型名
+     * @return
+     */
+    boolean exist(String name) throws IOException;
+
+    void insert(Category category) throws IOException;
+
+    public void delete(String id) throws IOException;
+
+    int getLatestId() throws IOException;
+
+    void update(String id, String newName) throws IOException;
 }

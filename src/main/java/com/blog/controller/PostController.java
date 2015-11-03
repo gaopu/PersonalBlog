@@ -45,8 +45,16 @@ public class PostController {
         String level = (String) session.getAttribute("level");
         //是管理员,调用服务将文章写入数据库
         if (level != null && level.equals("0")) {
+            //不能为空
+            if (title.equals("") || content.equals("")) {
+                //转到首页
+                response.sendRedirect("");
+                return;
+            }
+
             Date nowTime = new Date(System.currentTimeMillis());
 
+            //确保获得到的最新存储的文章id和内容一致
             synchronized (PostController.class) {
                 articleService.insert(new Article((Integer) session.getAttribute("id"),title,nowTime,0,0,"n"));
                 //获得刚存储的文章的id
