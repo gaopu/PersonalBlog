@@ -61,4 +61,9 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Article> getCommonArticle() throws IOException {
         return articleDao.getCommonArticle();
     }
+
+    @Override
+    public List<Article> getDeletedArticle() throws IOException {
+        return articleDao.getDeletedArticle();
+    }
 }

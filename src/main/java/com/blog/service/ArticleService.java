@@ -28,4 +28,6 @@ public interface ArticleService {
     int getLatestId() throws IOException;
 
     List<Article> getCommonArticle() throws IOException;
+
+    List<Article> getDeletedArticle() throws IOException;
 }

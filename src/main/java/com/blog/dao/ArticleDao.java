@@ -24,6 +24,8 @@ public interface ArticleDao {
      */
     List<Article> getCommonArticle() throws IOException;
 
+    List<Article> getDeletedArticle() throws IOException;
+
     String getTitle(int id) throws IOException;
 
     Date getTime(int id) throws IOException;

@@ -77,6 +77,7 @@
 
     function cancelmod() {
         $("#mod").html("");
+        $("#msg").html("");
     }
 
     $(document).ready(function() {

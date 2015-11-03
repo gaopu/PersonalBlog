@@ -1,6 +1,7 @@
 package com.blog.dao;
 
 import com.blog.mapper.ArticleCategoryMapper;
+import com.blog.mapper.ArticleMapper;
 import com.blog.po.ArticleCategory;
 import com.blog.utils.MybatisUtils;
 import org.apache.ibatis.session.SqlSession;
@@ -32,6 +33,17 @@ public class ArticleCategoryDaoImp implements ArticleCategoryDao {
             ArticleCategoryMapper mapper = session.getMapper(ArticleCategoryMapper.class);
             mapper.updateAfterDelCatrgory(oldCategoryId, newCategoryId);
             session.commit();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public int getCategoryId(int articleId) throws IOException {
+        SqlSession session = MybatisUtils.getSession();
+        try {
+            ArticleCategoryMapper mapper = session.getMapper(ArticleCategoryMapper.class);
+            return mapper.getCategoryId(articleId);
         } finally {
             session.close();
         }

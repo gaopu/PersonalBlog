@@ -2,6 +2,7 @@ package com.blog.mapper;
 
 import com.blog.po.ArticleCategory;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 /**
@@ -13,4 +14,7 @@ public interface ArticleCategoryMapper {
 
     @Update("update article_category set category_id=#{param2} where category_id=#{param1}")
     void updateAfterDelCatrgory(String oldCategoryId, String newCategoryId);
+
+    @Select("select category_id from article_category where article_id=#{articleId}")
+    int getCategoryId(int articleId);
 }

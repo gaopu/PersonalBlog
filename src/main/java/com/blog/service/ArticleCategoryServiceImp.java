@@ -25,4 +25,9 @@ public class ArticleCategoryServiceImp implements ArticleCategoryService {
     public void updateAfterDelCatrgory(String oldCategoryId, String newCategoryId) throws IOException {
         articleCategoryDao.updateAfterDelCatrgory(oldCategoryId,newCategoryId);
     }
+
+    @Override
+    public int getCategoryId(int articleId) throws IOException {
+        return articleCategoryDao.getCategoryId(articleId);
+    }
 }

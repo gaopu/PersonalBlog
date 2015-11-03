@@ -11,4 +11,6 @@ public interface ArticleCategoryService {
     void insert(ArticleCategory articleCategory) throws IOException;
 
     void updateAfterDelCatrgory(String oldCategoryId,String newCategoryId) throws IOException;
+
+    int getCategoryId(int articleId) throws IOException;
 }

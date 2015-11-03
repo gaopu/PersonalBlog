@@ -22,4 +22,14 @@ public interface ArticleMapper {
     //挑选出没有被删除的文章
     @Select("select * from article where deleted = 'n'")
     List<Article> getCommonArticle();
+
+    //挑选出被删除的文章
+    @Select("select * from article where deleted = 'y'")
+    List<Article> getDeletedArticle();
+
+    @Select("select read_num from article where id=#{articleId}")
+    int getReadNum(int articleId);
+
+    @Select("select comment_num from article where id=#{articleId}")
+    int getCommentNum(int articleId);
 }

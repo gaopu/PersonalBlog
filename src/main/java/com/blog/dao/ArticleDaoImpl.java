@@ -42,10 +42,20 @@ public class ArticleDaoImpl implements ArticleDao {
     @Override
     public List<Article> getCommonArticle() throws IOException {
         SqlSession session = MybatisUtils.getSession();
-
         try {
             ArticleMapper mapper = session.getMapper(ArticleMapper.class);
             return mapper.getCommonArticle();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public List<Article> getDeletedArticle() throws IOException {
+        SqlSession session = MybatisUtils.getSession();
+        try {
+            ArticleMapper mapper = session.getMapper(ArticleMapper.class);
+            return mapper.getDeletedArticle();
         } finally {
             session.close();
         }
