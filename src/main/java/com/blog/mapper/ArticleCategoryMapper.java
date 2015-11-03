@@ -1,6 +1,7 @@
 package com.blog.mapper;
 
 import com.blog.po.ArticleCategory;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -17,4 +18,7 @@ public interface ArticleCategoryMapper {
 
     @Select("select category_id from article_category where article_id=#{articleId}")
     int getCategoryId(int articleId);
+
+    @Delete("delete from article_category where article_id=#{articleId}")
+    void delete(int articleId);
 }

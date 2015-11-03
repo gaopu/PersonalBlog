@@ -1,8 +1,10 @@
 package com.blog.mapper;
 
 import com.blog.po.Article;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -32,4 +34,13 @@ public interface ArticleMapper {
 
     @Select("select comment_num from article where id=#{articleId}")
     int getCommentNum(int articleId);
+
+    @Update("update article set deleted='y' where id=#{articleId}")
+    void movaToDusbin(int articleId);
+
+    @Delete("delete from article where id=#{articleId}")
+    void delete(int articleId);
+
+    @Update("update article set deleted='n' where id=#{articleId}")
+    void recover(int articleId);
 }

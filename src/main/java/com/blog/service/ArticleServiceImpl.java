@@ -1,7 +1,11 @@
 package com.blog.service;
 
+import com.blog.dao.ArticleCategoryDao;
 import com.blog.dao.ArticleDao;
 import com.blog.po.Article;
+import com.blog.po.ArticleCategory;
+import com.blog.utils.MybatisUtils;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +20,8 @@ import java.util.List;
 public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleDao articleDao;
+    @Autowired
+    private ArticleCategoryDao articleCategoryDao;
 
     @Override
     public int getAuthorId(int id) throws IOException {
@@ -43,8 +49,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public String getDeleted(int id) throws IOException {
-        return articleDao.getDeleted(id);
+    public boolean isDeleted(int id) throws IOException {
+        return articleDao.isDeleted(id);
     }
 
     @Override
@@ -65,5 +71,21 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<Article> getDeletedArticle() throws IOException {
         return articleDao.getDeletedArticle();
+    }
+
+    @Override
+    public void movaToDusbin(int articleId) throws IOException {
+        articleDao.movaToDusbin(articleId);
+    }
+
+    @Override
+    public void delete(int articleId) throws IOException {
+        articleCategoryDao.delete(articleId);
+        articleDao.delete(articleId);
+    }
+
+    @Override
+    public void recover(int articleId) throws IOException {
+        articleDao.recover(articleId);
     }
 }

@@ -48,4 +48,16 @@ public class ArticleCategoryDaoImp implements ArticleCategoryDao {
             session.close();
         }
     }
+
+    @Override
+    public void delete(int articleId) throws IOException {
+        SqlSession session = MybatisUtils.getSession();
+        try {
+            ArticleCategoryMapper mapper = session.getMapper(ArticleCategoryMapper.class);
+            mapper.delete(articleId);
+            session.commit();
+        } finally {
+            session.close();
+        }
+    }
 }

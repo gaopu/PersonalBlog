@@ -19,4 +19,6 @@ public interface ArticleCategoryDao {
     void updateAfterDelCatrgory(String oldCategoryId,String newCategoryId) throws IOException;
 
     int getCategoryId(int articleId) throws IOException;
+
+    void delete(int articleId) throws IOException;
 }
