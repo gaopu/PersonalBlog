@@ -1,8 +1,10 @@
 package com.blog.controller;
 
+import com.blog.po.Article;
 import com.blog.po.ArticleCategory;
 import com.blog.po.Category;
 import com.blog.service.ArticleCategoryService;
+import com.blog.service.ArticleService;
 import com.blog.service.CategoryService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,9 @@ public class ManageController {
 
     @Autowired
     CategoryService categoryService;
+
+    @Autowired
+    ArticleService articleService;
 
     @RequestMapping(value = "" , method = RequestMethod.GET)
     public void manage(HttpServletResponse response) throws IOException {
@@ -136,6 +141,48 @@ public class ManageController {
             return "duplicate";
         }
         categoryService.update(id,newName);
+        return "success";
+    }
+
+    @RequestMapping(value = "deleted",method = RequestMethod.GET)
+    public String deletedArticle(Model model) throws IOException {
+        //获取所有被删的文章
+        List<Article> articles = articleService.getDeletedArticle();
+        model.addAttribute("articles",articles);
+        return "manage/deleted";
+    }
+
+    @RequestMapping(value = "deletearticle",method = RequestMethod.GET)
+    public @ResponseBody String deleteArticle(@RequestParam("id") String articleId) throws IOException {
+        int id;
+        try {
+            id = Integer.valueOf(articleId);
+        } catch (NumberFormatException e) {
+            return "fail";
+        }
+
+        if (articleService.isDeleted(id)) {
+            articleService.delete(id);
+        } else {
+            articleService.movaToDusbin(id);
+        }
+        return "success";
+    }
+
+    @RequestMapping(value = "recoverarticle",method = RequestMethod.GET)
+    public @ResponseBody String recoverArticle(@RequestParam("id") String articleId) throws IOException {
+        int id;
+        try {
+            id = Integer.valueOf(articleId);
+        } catch (NumberFormatException e) {
+            return "fail";
+        }
+
+        if (articleService.isDeleted(id)) {
+            articleService.recover(id);
+        } else {
+            return "fail";
+        }
         return "success";
     }
 }

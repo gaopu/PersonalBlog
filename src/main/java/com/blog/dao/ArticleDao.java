@@ -34,7 +34,13 @@ public interface ArticleDao {
 
     int getCommentNum(int id) throws IOException;
 
-    String getDeleted(int id) throws IOException;
+    boolean isDeleted(int id) throws IOException;
 
     void insert(Article article) throws IOException;
+
+    void movaToDusbin(int articleId) throws IOException;
+
+    void delete(int articleId) throws IOException;
+
+    void recover(int articleId) throws IOException;
 }

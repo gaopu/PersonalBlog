@@ -92,9 +92,13 @@ public class ArticleDaoImpl implements ArticleDao {
     }
 
     @Override
-    public String getDeleted(int id) throws IOException {
+    public boolean isDeleted(int id) throws IOException {
         article = getArticle(id);
-        return article.getDeleted();
+        String deleted = article.getDeleted();
+        if (deleted.equals("y")) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -103,6 +107,42 @@ public class ArticleDaoImpl implements ArticleDao {
         try {
             ArticleMapper mapper = session.getMapper(ArticleMapper.class);
             mapper.insert(article);
+            session.commit();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public void movaToDusbin(int articleId) throws IOException {
+        SqlSession session = MybatisUtils.getSession();
+        try {
+            ArticleMapper mapper = session.getMapper(ArticleMapper.class);
+            mapper.movaToDusbin(articleId);
+            session.commit();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public void delete(int articleId) throws IOException {
+        SqlSession session = MybatisUtils.getSession();
+        try {
+            ArticleMapper mapper = session.getMapper(ArticleMapper.class);
+            mapper.delete(articleId);
+            session.commit();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public void recover(int articleId) throws IOException {
+        SqlSession session = MybatisUtils.getSession();
+        try {
+            ArticleMapper mapper = session.getMapper(ArticleMapper.class);
+            mapper.recover(articleId);
             session.commit();
         } finally {
             session.close();

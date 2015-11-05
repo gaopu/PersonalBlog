@@ -61,6 +61,6 @@ public class HomePageController {
         model.addAttribute("articleId_categoryName",articleId_categoryName);
         model.addAttribute("articleId_readNum",articleId_readNum);
         model.addAttribute("articleId_commentNum",articleId_commentNum);
-        return "index";
+        return "bloghome";
     }
 }

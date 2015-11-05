@@ -7,6 +7,9 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <context:component-scan base-package="com.blog"/>
+    <!-- 配置默认的servlet-handler，名字是web服务器的默认名称,在配置文件server.xml里面查看-->
+    <!-- 配置这个主要是处理静态资源的访问，不配之访问不成-->
+    <mvc:default-servlet-handler default-servlet-name="default" />
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/"/>
