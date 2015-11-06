@@ -55,8 +55,7 @@
                             <h1 class="post-title"><a href="${pageContext.request.contextPath}/article?id=${article.id}">${article.title}</a></h1>
                             <div class="post-meta">
                                 <span class="author">作者：${authorId_nickName[article.author_Id]}</span> &bull;
-                                <time class="post-date"><fmt:formatDate value="${time}" pattern="yyyy年MM月dd日 HH:mm:ss"/></time> &bull;
-                                <span>${articleId_categoryName[article.id]}</span>
+                                <time class="post-date"><fmt:formatDate value="${time}" pattern="yyyy年MM月dd日 HH:mm:ss"/></time>
                             </div>
                         </div>
                         <div class="post-content">
