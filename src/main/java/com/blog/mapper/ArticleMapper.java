@@ -1,10 +1,7 @@
 package com.blog.mapper;
 
 import com.blog.po.Article;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -43,4 +40,11 @@ public interface ArticleMapper {
 
     @Update("update article set deleted='n' where id=#{articleId}")
     void recover(int articleId);
+    //获取总记录数
+    @Select("select count(*) from article WHERE deleted = 'n'")
+    public int getRowCount();
+    //获取文章
+    @Select("select * from article where deleted = 'n' limit #{offset}, #{size}")
+    public List<Article> getPagedArticle(@Param("offset") int offset, @Param("size") int size);
+
 }

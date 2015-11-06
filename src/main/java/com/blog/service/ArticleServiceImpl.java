@@ -3,9 +3,7 @@ package com.blog.service;
 import com.blog.dao.ArticleCategoryDao;
 import com.blog.dao.ArticleDao;
 import com.blog.po.Article;
-import com.blog.po.ArticleCategory;
-import com.blog.utils.MybatisUtils;
-import org.apache.ibatis.session.SqlSession;
+import com.blog.utils.PageParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -87,5 +85,22 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public void recover(int articleId) throws IOException {
         articleDao.recover(articleId);
+    }
+
+    @Override
+    public int getRowCount() throws IOException {
+        return articleDao.getRowCount();
+    }
+
+    @Override
+    public PageParam getPagedArticle(PageParam pageParam) throws IOException {
+        int currPage = pageParam.getCurrPage();
+        // limit offset, size
+        int offset = (currPage - 1) * PageParam.pageSize;
+        int size = PageParam.pageSize;
+        List<Article> articleList = articleDao.getPagedArticle(offset,size);
+        pageParam.setData(articleList);
+
+        return pageParam;
     }
 }

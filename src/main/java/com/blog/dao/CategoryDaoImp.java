@@ -109,4 +109,38 @@ public class CategoryDaoImp implements CategoryDao {
             session.close();
         }
     }
+
+    @Override
+    public List<Integer> getCategoryByArticleId(int id) throws IOException {
+        SqlSession sqlSession = MybatisUtils.getSession();
+        CategoryMapper articleMapper = sqlSession.getMapper(CategoryMapper.class);
+        List<Integer> categorylist = articleMapper.getCategoryByArticleId(id);
+        sqlSession.commit();
+        return categorylist;
+    }
+
+    @Override
+    public List<String> getAllCategory() throws IOException {
+        SqlSession sqlSession = MybatisUtils.getSession();
+        CategoryMapper articleMapper = sqlSession.getMapper(CategoryMapper.class);
+        List<String> allcategorylist = articleMapper.getAllCategory();
+        sqlSession.commit();
+        return allcategorylist;
+    }
+
+    @Override
+    public void delCategory(int id) throws IOException {
+        SqlSession sqlSession = MybatisUtils.getSession();
+        CategoryMapper articleMapper = sqlSession.getMapper(CategoryMapper.class);
+        articleMapper.delCategory(id);
+        sqlSession.commit();
+    }
+
+    @Override
+    public void setCategory(int id, int selectedId) throws IOException {
+        SqlSession sqlSession = MybatisUtils.getSession();
+        CategoryMapper articleMapper = sqlSession.getMapper(CategoryMapper.class);
+        articleMapper.setCategory(id,selectedId);
+        sqlSession.commit();
+    }
 }

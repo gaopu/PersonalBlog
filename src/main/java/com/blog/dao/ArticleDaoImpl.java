@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -147,5 +146,23 @@ public class ArticleDaoImpl implements ArticleDao {
         } finally {
             session.close();
         }
+    }
+
+    @Override
+    public int getRowCount() throws IOException {
+        SqlSession sqlSession = MybatisUtils.getSession();
+        ArticleMapper articleMapper = sqlSession.getMapper(ArticleMapper.class);
+        int row = articleMapper.getRowCount();
+        sqlSession.commit();
+        return row;
+    }
+
+    @Override
+    public List<Article> getPagedArticle(int offset, int size) throws IOException {
+        SqlSession sqlSession = MybatisUtils.getSession();
+        ArticleMapper articleMapper = sqlSession.getMapper(ArticleMapper.class);
+        List<Article> list = articleMapper.getPagedArticle(offset,size);
+        sqlSession.commit();
+        return list;
     }
 }

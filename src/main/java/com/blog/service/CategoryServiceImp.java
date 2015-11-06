@@ -56,4 +56,22 @@ public class CategoryServiceImp implements CategoryService {
     public void update(String id, String newName) throws IOException {
         categoryDao.update(id,newName);
     }
+
+    @Override
+    public List<Integer> getCategoryByArticleId(int id) throws IOException {
+        return categoryDao.getCategoryByArticleId(id);
+    }
+
+    @Override
+    public List<String> getAllCategory() throws IOException {
+        return categoryDao.getAllCategory();
+    }
+
+    @Override
+    public void setCategory(int id, int[] selectedId) throws IOException {
+        categoryDao.delCategory(id);
+        for (int i = 0; i < selectedId.length;i++){
+            categoryDao.setCategory(id,selectedId[i]);
+        }
+    }
 }

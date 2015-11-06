@@ -43,4 +43,9 @@ public interface ArticleDao {
     void delete(int articleId) throws IOException;
 
     void recover(int articleId) throws IOException;
+
+    int getRowCount() throws IOException;
+    List<Article> getPagedArticle(int offset, int size) throws IOException;
+//    public void deleteArticle(int id) throws IOException;
+
 }
