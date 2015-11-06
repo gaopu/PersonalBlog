@@ -1,10 +1,7 @@
 package com.blog.mapper;
 
 import com.blog.po.Category;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -43,4 +40,17 @@ public interface CategoryMapper {
 
     @Update("update category set name=#{param2} where id=#{param1}")
     void update(String id, String newName);
+
+    //获取文章分类
+    @Select("select id from category where id in(select category_id from article_category where article_id=#{id})")
+    public List<Integer> getCategoryByArticleId(int id);
+    //获得全部分类
+    @Select("select name from category")
+    public List<String> getAllCategory();
+    //删除文章分类
+    @Delete("delete from article_category where article_id = #{id}")
+    public void delCategory(int id);
+    //设置新的文章分类
+    @Insert("insert into article_category(article_id,category_id) values(#{id},#{selectedId})")
+    public void setCategory(@Param("id") int id, @Param("selectedId") int selectedId);
 }
