@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by geekgao on 15-10-18.
@@ -27,7 +28,7 @@ public class ArticleCategoryServiceImp implements ArticleCategoryService {
     }
 
     @Override
-    public int getCategoryId(int articleId) throws IOException {
+    public List<Integer> getCategoryId(int articleId) throws IOException {
         return articleCategoryDao.getCategoryId(articleId);
     }
 }

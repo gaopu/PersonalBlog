@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by geekgao on 15-10-18.
@@ -39,7 +40,7 @@ public class ArticleCategoryDaoImp implements ArticleCategoryDao {
     }
 
     @Override
-    public int getCategoryId(int articleId) throws IOException {
+    public List<Integer> getCategoryId(int articleId) throws IOException {
         SqlSession session = MybatisUtils.getSession();
         try {
             ArticleCategoryMapper mapper = session.getMapper(ArticleCategoryMapper.class);

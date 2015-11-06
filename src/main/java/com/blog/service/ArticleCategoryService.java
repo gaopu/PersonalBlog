@@ -3,6 +3,7 @@ package com.blog.service;
 import com.blog.po.ArticleCategory;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by geekgao on 15-10-18.
@@ -12,5 +13,5 @@ public interface ArticleCategoryService {
 
     void updateAfterDelCatrgory(String oldCategoryId,String newCategoryId) throws IOException;
 
-    int getCategoryId(int articleId) throws IOException;
+    List<Integer> getCategoryId(int articleId) throws IOException;
 }
