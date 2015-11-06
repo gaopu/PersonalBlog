@@ -39,8 +39,6 @@ public class HomePageController {
 
         //存放作者id和作者昵称的对应关系
         Map<Integer,String> authorId_nickName = new HashMap<Integer, String>();
-        //存放文章id和文章分类名称的信息
-        Map<Integer,String> articleId_categoryName = new HashMap<Integer, String>();
         //存放文章id和阅读数量的信息
         Map<Integer,Integer> articleId_readNum = new HashMap<Integer, Integer>();
         //存放文章id和评论数量的信息
@@ -53,12 +51,10 @@ public class HomePageController {
             articleId = article.getId();
 
             authorId_nickName.put(authorId,adminService.getNickName(authorId));
-            articleId_categoryName.put(articleId,categoryService.getName(articleCategoryService.getCategoryId(articleId)));
             articleId_readNum.put(articleId,articleService.getReadNum(articleId));
             articleId_commentNum.put(articleId,articleService.getCommentNum(articleId));
         }
         model.addAttribute("authorId_nickName",authorId_nickName);
-        model.addAttribute("articleId_categoryName",articleId_categoryName);
         model.addAttribute("articleId_readNum",articleId_readNum);
         model.addAttribute("articleId_commentNum",articleId_commentNum);
         return "bloghome";
