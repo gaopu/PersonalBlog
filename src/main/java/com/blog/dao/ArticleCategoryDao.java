@@ -3,6 +3,7 @@ package com.blog.dao;
 import com.blog.po.ArticleCategory;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by geekgao on 15-10-18.
@@ -18,7 +19,7 @@ public interface ArticleCategoryDao {
      */
     void updateAfterDelCatrgory(String oldCategoryId,String newCategoryId) throws IOException;
 
-    int getCategoryId(int articleId) throws IOException;
+    List<Integer> getCategoryId(int articleId) throws IOException;
 
     void delete(int articleId) throws IOException;
 }
