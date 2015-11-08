@@ -1,10 +1,8 @@
 package com.blog.controller;
 
 import com.blog.po.Article;
-import com.blog.service.AdminService;
-import com.blog.service.ArticleCategoryService;
-import com.blog.service.ArticleService;
-import com.blog.service.CategoryService;
+import com.blog.po.Configure;
+import com.blog.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,9 +25,7 @@ public class HomePageController {
     @Autowired
     private AdminService adminService;
     @Autowired
-    private CategoryService categoryService;
-    @Autowired
-    private ArticleCategoryService articleCategoryService;
+    private ConfigureService configureService;
 
     @RequestMapping(value = "",method = RequestMethod.GET)
     public String getIndex(Model model) throws IOException {
@@ -57,6 +53,7 @@ public class HomePageController {
         model.addAttribute("authorId_nickName",authorId_nickName);
         model.addAttribute("articleId_readNum",articleId_readNum);
         model.addAttribute("articleId_commentNum",articleId_commentNum);
+
         return "bloghome";
     }
 }

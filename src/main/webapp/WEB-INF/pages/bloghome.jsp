@@ -42,7 +42,6 @@
 <%@include file="nav.jsp"%>
 
 <div class="container">
-
     <div class="starter-template">
         <div class="row">
             <div class="col-md-8">
@@ -87,7 +86,7 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

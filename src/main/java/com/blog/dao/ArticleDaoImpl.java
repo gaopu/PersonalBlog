@@ -113,11 +113,11 @@ public class ArticleDaoImpl implements ArticleDao {
     }
 
     @Override
-    public void movaToDusbin(int articleId) throws IOException {
+    public void moveToDusbin(int articleId) throws IOException {
         SqlSession session = MybatisUtils.getSession();
         try {
             ArticleMapper mapper = session.getMapper(ArticleMapper.class);
-            mapper.movaToDusbin(articleId);
+            mapper.moveToDusbin(articleId);
             session.commit();
         } finally {
             session.close();

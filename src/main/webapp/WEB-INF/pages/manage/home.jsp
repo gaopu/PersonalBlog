@@ -15,6 +15,8 @@
 <a href="post">发布博文</a><br>
 <a href="category">类别管理</a><br>
 <a href="deleted">回收站管理</a><br>
+<a href="configured">配置博客</a><br>
+<a href="getarticle?page=1">文章管理</a><br>
 <a href="${pageContext.request.contextPath}/">首页</a>
 </body>
 </html>

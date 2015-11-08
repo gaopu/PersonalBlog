@@ -33,7 +33,7 @@ public interface ArticleMapper {
     int getCommentNum(int articleId);
 
     @Update("update article set deleted='y' where id=#{articleId}")
-    void movaToDusbin(int articleId);
+    void moveToDusbin(int articleId);
 
     @Delete("delete from article where id=#{articleId}")
     void delete(int articleId);

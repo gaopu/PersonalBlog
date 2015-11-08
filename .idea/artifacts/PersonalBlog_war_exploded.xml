@@ -20,6 +20,7 @@
           <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.3.0" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.36" />
           <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
+          <element id="library" level="project" name="lib" />
         </element>
       </element>
       <element id="directory" name="META-INF">
