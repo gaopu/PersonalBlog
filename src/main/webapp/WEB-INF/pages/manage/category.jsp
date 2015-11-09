@@ -36,7 +36,7 @@
 <input id="txt"><input id="btnAdd" type="button" value="添加分类">
 <div id="mod"></div>
 <div id="msg"></div>
-<a href="${pageContext.request.contextPath}">首页</a>
+<a href="${pageContext.request.contextPath}/">首页</a>
 
 <script type="text/javascript">
 

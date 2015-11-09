@@ -32,7 +32,7 @@ public interface ArticleService {
 
     List<Article> getDeletedArticle() throws IOException;
 
-    void movaToDusbin(int articleId) throws IOException;
+    void moveToDusbin(int articleId) throws IOException;
 
     void delete(int articleId) throws IOException;
 

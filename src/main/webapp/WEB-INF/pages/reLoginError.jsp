@@ -12,6 +12,6 @@
 </head>
 <body>
 亲爱的<%=session.getAttribute("nickname")%>,您已经登录过了,请不要重复登录<br>
-<a href="${pageContext.request.contextPath}">返回首页</a>
+<a href="${pageContext.request.contextPath}/">返回首页</a>
 </body>
 </html>

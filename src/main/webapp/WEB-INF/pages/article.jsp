@@ -14,13 +14,14 @@
   <script src="http://cdn.bootcss.com/jquery/3.0.0-alpha1/jquery.js"></script>
 </head>
 <body>
-<h1 align="center">我是博文，在下面对我进行评论</h1><br/>
+<h1>${title}</h1><br>
+<div>${content}</div><br/>
 
 <hr/>
 <div class="section_title">
   <span>各种回音</span>
 </div>
-<c:forEach items="${requestScope.commentsList}" var="t">
+<c:forEach items="${commentsList}" var="t">
   ${t.user_name} 说:<br/>
   ${t.content}<br/>
   ${t.time}<br/>
@@ -67,7 +68,7 @@
     <button class="btn-revoke">取消</button>
   </div>
   <br/>
-  <c:forEach items="${requestScope.replyList}" var="tr">
+  <c:forEach items="${replyList}" var="tr">
     <c:if test ="${tr.comment_id==t.id}">
       ${tr.user_name} 说:<br/>
       ${tr.content}

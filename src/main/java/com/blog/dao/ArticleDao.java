@@ -38,7 +38,7 @@ public interface ArticleDao {
 
     void insert(Article article) throws IOException;
 
-    void movaToDusbin(int articleId) throws IOException;
+    void moveToDusbin(int articleId) throws IOException;
 
     void delete(int articleId) throws IOException;
 
