@@ -18,6 +18,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @Controller
+@RequestMapping("manage")
 public class ArticleController {
 
 	@Resource

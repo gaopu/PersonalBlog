@@ -16,6 +16,7 @@ import java.io.IOException;
  * Created by hexing on 15-10-15.
  */
 @Controller
+@RequestMapping("manage")
 public class ConfigureController {
     @Autowired
     ConfigureService configureService;
@@ -39,7 +40,7 @@ public class ConfigureController {
         configure.setEmail_inform(Integer.parseInt(request.getParameter("isemail")));
         configureService.setConfigure(configure);
         try {
-            response.sendRedirect("http://localhost:8080/configured");
+            response.sendRedirect("configured");
         } catch (IOException e) {
             e.printStackTrace();
         }
