@@ -15,18 +15,6 @@ import java.util.List;
 @Repository
 public class CategoryDaoImp implements CategoryDao {
 
-    /*private Category category;
-
-    private Category getCategory(int id) throws IOException {
-        SqlSession session = MybatisUtils.getSession();
-        try {
-            CategoryMapper mapper = session.getMapper(CategoryMapper.class);
-            return mapper.getCategory(id);
-        } finally {
-            session.close();
-        }
-    }*/
-
     @Override
     public String getName(int id) throws IOException {
         SqlSession session = MybatisUtils.getSession();
@@ -47,5 +35,112 @@ public class CategoryDaoImp implements CategoryDao {
         } finally {
             session.close();
         }
+    }
+
+    @Override
+    public int getArticleCountByCategoryId(int categoryId) throws IOException {
+        SqlSession session = MybatisUtils.getSession();
+        try {
+            CategoryMapper mapper = session.getMapper(CategoryMapper.class);
+            return mapper.getArticleCountByCategoryId(categoryId);
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public boolean exist(String name) throws IOException {
+        SqlSession session = MybatisUtils.getSession();
+        try {
+            CategoryMapper mapper = session.getMapper(CategoryMapper.class);
+            if (mapper.categoryCount(name) == 0) {
+                return false;
+            } else {
+                return true;
+            }
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public void insert(Category category) throws IOException {
+        SqlSession session = MybatisUtils.getSession();
+        try {
+            CategoryMapper mapper = session.getMapper(CategoryMapper.class);
+            mapper.insert(category);
+            session.commit();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public void delete(String id) throws IOException {
+        SqlSession session = MybatisUtils.getSession();
+        try {
+            CategoryMapper mapper = session.getMapper(CategoryMapper.class);
+            mapper.delete(id);
+            session.commit();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public int getLatestId() throws IOException {
+        SqlSession session = MybatisUtils.getSession();
+        try {
+            CategoryMapper mapper = session.getMapper(CategoryMapper.class);
+            return mapper.getLatestId();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public void update(String id, String newName) throws IOException {
+        SqlSession session = MybatisUtils.getSession();
+        try {
+            CategoryMapper mapper = session.getMapper(CategoryMapper.class);
+            mapper.update(id,newName);
+            session.commit();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public List<Integer> getCategoryByArticleId(int id) throws IOException {
+        SqlSession sqlSession = MybatisUtils.getSession();
+        CategoryMapper articleMapper = sqlSession.getMapper(CategoryMapper.class);
+        List<Integer> categorylist = articleMapper.getCategoryByArticleId(id);
+        sqlSession.commit();
+        return categorylist;
+    }
+
+    @Override
+    public List<String> getAllCategory() throws IOException {
+        SqlSession sqlSession = MybatisUtils.getSession();
+        CategoryMapper articleMapper = sqlSession.getMapper(CategoryMapper.class);
+        List<String> allcategorylist = articleMapper.getAllCategory();
+        sqlSession.commit();
+        return allcategorylist;
+    }
+
+    @Override
+    public void delCategory(int id) throws IOException {
+        SqlSession sqlSession = MybatisUtils.getSession();
+        CategoryMapper articleMapper = sqlSession.getMapper(CategoryMapper.class);
+        articleMapper.delCategory(id);
+        sqlSession.commit();
+    }
+
+    @Override
+    public void setCategory(int id, int selectedId) throws IOException {
+        SqlSession sqlSession = MybatisUtils.getSession();
+        CategoryMapper articleMapper = sqlSession.getMapper(CategoryMapper.class);
+        articleMapper.setCategory(id,selectedId);
+        sqlSession.commit();
     }
 }

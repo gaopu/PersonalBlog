@@ -1,6 +1,7 @@
 package com.blog.service;
 
 import com.blog.po.Article;
+import com.blog.utils.PageParam;
 
 import java.io.IOException;
 import java.util.Date;
@@ -21,11 +22,25 @@ public interface ArticleService {
 
     int getCommentNum(int id) throws IOException;
 
-    String getDeleted(int id) throws IOException;
+    boolean isDeleted(int id) throws IOException;
 
     void insert(Article article) throws IOException;
 
     int getLatestId() throws IOException;
 
     List<Article> getCommonArticle() throws IOException;
+
+    List<Article> getDeletedArticle() throws IOException;
+
+    void moveToDusbin(int articleId) throws IOException;
+
+    void delete(int articleId) throws IOException;
+
+    void recover(int articleId) throws IOException;
+
+    //获取文章总记录数
+    public int getRowCount() throws IOException;
+    //分页获得配置的文章
+    public PageParam getPagedArticle(PageParam pageParam) throws IOException;
+
 }

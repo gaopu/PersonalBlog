@@ -1,7 +1,9 @@
 package com.blog.service;
 
+import com.blog.dao.ArticleCategoryDao;
 import com.blog.dao.ArticleDao;
 import com.blog.po.Article;
+import com.blog.utils.PageParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,8 @@ import java.util.List;
 public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleDao articleDao;
+    @Autowired
+    private ArticleCategoryDao articleCategoryDao;
 
     @Override
     public int getAuthorId(int id) throws IOException {
@@ -43,8 +47,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public String getDeleted(int id) throws IOException {
-        return articleDao.getDeleted(id);
+    public boolean isDeleted(int id) throws IOException {
+        return articleDao.isDeleted(id);
     }
 
     @Override
@@ -60,5 +64,43 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<Article> getCommonArticle() throws IOException {
         return articleDao.getCommonArticle();
+    }
+
+    @Override
+    public List<Article> getDeletedArticle() throws IOException {
+        return articleDao.getDeletedArticle();
+    }
+
+    @Override
+    public void moveToDusbin(int articleId) throws IOException {
+        articleDao.moveToDusbin(articleId);
+    }
+
+    @Override
+    public void delete(int articleId) throws IOException {
+        articleCategoryDao.delete(articleId);
+        articleDao.delete(articleId);
+    }
+
+    @Override
+    public void recover(int articleId) throws IOException {
+        articleDao.recover(articleId);
+    }
+
+    @Override
+    public int getRowCount() throws IOException {
+        return articleDao.getRowCount();
+    }
+
+    @Override
+    public PageParam getPagedArticle(PageParam pageParam) throws IOException {
+        int currPage = pageParam.getCurrPage();
+        // limit offset, size
+        int offset = (currPage - 1) * PageParam.pageSize;
+        int size = PageParam.pageSize;
+        List<Article> articleList = articleDao.getPagedArticle(offset,size);
+        pageParam.setData(articleList);
+
+        return pageParam;
     }
 }

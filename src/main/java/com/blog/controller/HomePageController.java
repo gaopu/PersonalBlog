@@ -1,8 +1,8 @@
 package com.blog.controller;
 
 import com.blog.po.Article;
-import com.blog.service.AdminService;
-import com.blog.service.ArticleService;
+import com.blog.po.Configure;
+import com.blog.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +24,8 @@ public class HomePageController {
     private ArticleService articleService;
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private ConfigureService configureService;
 
     @RequestMapping(value = "",method = RequestMethod.GET)
     public String getIndex(Model model) throws IOException {
@@ -32,14 +34,26 @@ public class HomePageController {
         model.addAttribute("articles",articles);
 
         //存放作者id和作者昵称的对应关系
-        Map<Integer,String> id_Nickname = new HashMap<Integer, String>();
+        Map<Integer,String> authorId_nickName = new HashMap<Integer, String>();
+        //存放文章id和阅读数量的信息
+        Map<Integer,Integer> articleId_readNum = new HashMap<Integer, Integer>();
+        //存放文章id和评论数量的信息
+        Map<Integer,Integer> articleId_commentNum = new HashMap<Integer, Integer>();
 
-        int id;
+        int authorId;
+        int articleId;
         for (Article article:articles) {
-            id = article.getAuthor_Id();
-            id_Nickname.put(id,adminService.getNickName(id));
+            authorId = article.getAuthor_Id();
+            articleId = article.getId();
+
+            authorId_nickName.put(authorId,adminService.getNickName(authorId));
+            articleId_readNum.put(articleId,articleService.getReadNum(articleId));
+            articleId_commentNum.put(articleId,articleService.getCommentNum(articleId));
         }
-        model.addAttribute("id_nickname",id_Nickname);
-        return "index";
+        model.addAttribute("authorId_nickName",authorId_nickName);
+        model.addAttribute("articleId_readNum",articleId_readNum);
+        model.addAttribute("articleId_commentNum",articleId_commentNum);
+
+        return "bloghome";
     }
 }

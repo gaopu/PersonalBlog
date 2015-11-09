@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -42,10 +41,20 @@ public class ArticleDaoImpl implements ArticleDao {
     @Override
     public List<Article> getCommonArticle() throws IOException {
         SqlSession session = MybatisUtils.getSession();
-
         try {
             ArticleMapper mapper = session.getMapper(ArticleMapper.class);
             return mapper.getCommonArticle();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public List<Article> getDeletedArticle() throws IOException {
+        SqlSession session = MybatisUtils.getSession();
+        try {
+            ArticleMapper mapper = session.getMapper(ArticleMapper.class);
+            return mapper.getDeletedArticle();
         } finally {
             session.close();
         }
@@ -82,9 +91,13 @@ public class ArticleDaoImpl implements ArticleDao {
     }
 
     @Override
-    public String getDeleted(int id) throws IOException {
+    public boolean isDeleted(int id) throws IOException {
         article = getArticle(id);
-        return article.getDeleted();
+        String deleted = article.getDeleted();
+        if (deleted.equals("y")) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -97,5 +110,59 @@ public class ArticleDaoImpl implements ArticleDao {
         } finally {
             session.close();
         }
+    }
+
+    @Override
+    public void moveToDusbin(int articleId) throws IOException {
+        SqlSession session = MybatisUtils.getSession();
+        try {
+            ArticleMapper mapper = session.getMapper(ArticleMapper.class);
+            mapper.moveToDusbin(articleId);
+            session.commit();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public void delete(int articleId) throws IOException {
+        SqlSession session = MybatisUtils.getSession();
+        try {
+            ArticleMapper mapper = session.getMapper(ArticleMapper.class);
+            mapper.delete(articleId);
+            session.commit();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public void recover(int articleId) throws IOException {
+        SqlSession session = MybatisUtils.getSession();
+        try {
+            ArticleMapper mapper = session.getMapper(ArticleMapper.class);
+            mapper.recover(articleId);
+            session.commit();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public int getRowCount() throws IOException {
+        SqlSession sqlSession = MybatisUtils.getSession();
+        ArticleMapper articleMapper = sqlSession.getMapper(ArticleMapper.class);
+        int row = articleMapper.getRowCount();
+        sqlSession.commit();
+        return row;
+    }
+
+    @Override
+    public List<Article> getPagedArticle(int offset, int size) throws IOException {
+        SqlSession sqlSession = MybatisUtils.getSession();
+        ArticleMapper articleMapper = sqlSession.getMapper(ArticleMapper.class);
+        List<Article> list = articleMapper.getPagedArticle(offset,size);
+        sqlSession.commit();
+        return list;
     }
 }

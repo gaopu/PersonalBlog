@@ -22,4 +22,25 @@ public interface CategoryDao {
      * @return
      */
     List<Category> getAll() throws IOException;
+
+    int getArticleCountByCategoryId(int categoryId) throws IOException;
+
+    /**
+     * 检测类型是否存在
+     * @param name 类型名
+     * @return
+     */
+    boolean exist(String name) throws IOException;
+
+    void insert(Category category) throws IOException;
+
+    void delete(String id) throws IOException;
+
+    int getLatestId() throws IOException;
+
+    void update(String id, String newName) throws IOException;
+    public List<Integer> getCategoryByArticleId(int id) throws IOException;
+    public List<String> getAllCategory() throws IOException;
+    public void delCategory(int id) throws IOException;
+    public void setCategory(int id, int selectedId) throws IOException;
 }

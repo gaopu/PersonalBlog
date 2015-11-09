@@ -24,6 +24,8 @@ public interface ArticleDao {
      */
     List<Article> getCommonArticle() throws IOException;
 
+    List<Article> getDeletedArticle() throws IOException;
+
     String getTitle(int id) throws IOException;
 
     Date getTime(int id) throws IOException;
@@ -32,7 +34,18 @@ public interface ArticleDao {
 
     int getCommentNum(int id) throws IOException;
 
-    String getDeleted(int id) throws IOException;
+    boolean isDeleted(int id) throws IOException;
 
     void insert(Article article) throws IOException;
+
+    void moveToDusbin(int articleId) throws IOException;
+
+    void delete(int articleId) throws IOException;
+
+    void recover(int articleId) throws IOException;
+
+    int getRowCount() throws IOException;
+    List<Article> getPagedArticle(int offset, int size) throws IOException;
+//    public void deleteArticle(int id) throws IOException;
+
 }

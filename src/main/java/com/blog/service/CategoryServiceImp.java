@@ -26,4 +26,52 @@ public class CategoryServiceImp implements CategoryService {
     public List<Category> getAll() throws IOException {
         return categoryDao.getAll();
     }
+
+    @Override
+    public int getArticleCountByCategoryId(int categoryId) throws IOException {
+        return categoryDao.getArticleCountByCategoryId(categoryId);
+    }
+
+    @Override
+    public boolean exist(String name) throws IOException {
+        return categoryDao.exist(name);
+    }
+
+    @Override
+    public void insert(Category category) throws IOException {
+        categoryDao.insert(category);
+    }
+
+    @Override
+    public void delete(String id) throws IOException {
+        categoryDao.delete(id);
+    }
+
+    @Override
+    public int getLatestId() throws IOException {
+        return categoryDao.getLatestId();
+    }
+
+    @Override
+    public void update(String id, String newName) throws IOException {
+        categoryDao.update(id,newName);
+    }
+
+    @Override
+    public List<Integer> getCategoryByArticleId(int id) throws IOException {
+        return categoryDao.getCategoryByArticleId(id);
+    }
+
+    @Override
+    public List<String> getAllCategory() throws IOException {
+        return categoryDao.getAllCategory();
+    }
+
+    @Override
+    public void setCategory(int id, int[] selectedId) throws IOException {
+        categoryDao.delCategory(id);
+        for (int i = 0; i < selectedId.length;i++){
+            categoryDao.setCategory(id,selectedId[i]);
+        }
+    }
 }
