@@ -34,7 +34,7 @@
         </tr>
     </c:forEach>
 </table>
-<a href="${pageContext.request.contextPath}">首页</a>
+<a href="${pageContext.request.contextPath}/">首页</a>
 
 <script>
 
