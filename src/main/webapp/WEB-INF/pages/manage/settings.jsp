@@ -32,8 +32,8 @@
         <option value="3">20</option>
         </select><br><br>
         有评论是否邮件通知<br>
-      <input type="radio" name="isemail" value="0"/>是
-      <input type="radio" name="isemail" value="1"/>否<br><br>
+      <input type="radio" name="isemail" value="0"/>否
+      <input type="radio" name="isemail" value="1"/>是<br><br>
       <input type="submit" value="保存设置">
 </form>
 
