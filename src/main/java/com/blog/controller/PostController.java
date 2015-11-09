@@ -10,8 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -32,24 +32,22 @@ public class PostController {
     private ArticleCategoryService articleCategoryService;
 
     /**
-     * 博文表单验证
+     * 提交博文表单验证
      * @param session
-     * @param response
-     * @param title
-     * @param content
+     * @param title 博客标题
+     * @param content 内容
+     * @param categoryIds 类别的id,多个类别用逗号分开
      * @throws IOException
      */
     @RequestMapping(value = "postedit" ,method = RequestMethod.POST)
-    public void postEdit(HttpSession session,HttpServletResponse response,@RequestParam("title") String title,@RequestParam("content") String content,@RequestParam("category") int categoryId) throws IOException {
+    public @ResponseBody String postEdit(HttpSession session, @RequestParam("title") String title, @RequestParam("content") String content, @RequestParam("categoryIds") String categoryIds) throws IOException {
         //根据session中的level判断是不是管理员
         String level = (String) session.getAttribute("level");
         //是管理员,调用服务将文章写入数据库
         if (level != null && level.equals("0")) {
             //不能为空
             if (title.equals("") || content.equals("")) {
-                //转到首页
-                response.sendRedirect("");
-                return;
+                return "paramWrong";
             }
 
             Date nowTime = new Date(System.currentTimeMillis());
@@ -60,14 +58,21 @@ public class PostController {
                 //获得刚存储的文章的id
                 int latestId = articleService.getLatestId();
                 //存储文章和类别的关联信息
-                articleCategoryService.insert(new ArticleCategory(latestId,categoryId));
+                if (categoryIds.equals("")) {
+                    //1号分类默认是“未分类”
+                    articleCategoryService.insert(new ArticleCategory(latestId, 1));
+                } else {
+                    String categoryId[] = categoryIds.split(",");
+                    for (String id:categoryId) {
+                        articleCategoryService.insert(new ArticleCategory(latestId, Integer.valueOf(id)));
+                    }
+                }
                 //文章存储到本地
                 saveArticleToDisk(latestId, content);
             }
 
         }
-        //转到首页
-        response.sendRedirect("");
+        return "success";
     }
 
     /**
@@ -84,7 +89,7 @@ public class PostController {
         File folder = new File(articleFolderPath);
         folder.mkdirs();
 
-        BufferedWriter writer = new BufferedWriter(new FileWriter(articleFolderPath + latestId + ".md"));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(articleFolderPath + latestId));
         writer.write(content);
         writer.close();
     }

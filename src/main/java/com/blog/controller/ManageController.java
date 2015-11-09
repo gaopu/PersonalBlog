@@ -164,7 +164,7 @@ public class ManageController {
         if (articleService.isDeleted(id)) {
             articleService.delete(id);
         } else {
-            articleService.movaToDusbin(id);
+            articleService.moveToDusbin(id);
         }
         return "success";
     }

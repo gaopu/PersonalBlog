@@ -72,8 +72,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public void movaToDusbin(int articleId) throws IOException {
-        articleDao.movaToDusbin(articleId);
+    public void moveToDusbin(int articleId) throws IOException {
+        articleDao.moveToDusbin(articleId);
     }
 
     @Override

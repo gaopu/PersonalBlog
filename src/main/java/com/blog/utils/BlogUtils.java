@@ -1,5 +1,6 @@
 package com.blog.utils;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -12,5 +13,9 @@ public class BlogUtils {
         Properties properties = new Properties();
         properties.load(BlogUtils.class.getResourceAsStream("/blog.properties"));
         return properties.getProperty("articleFolderPath");
+    }
+
+    public static File getArticleFile(int id) throws IOException {
+        return new File(BlogUtils.getArticleFolderPath() + id);
     }
 }

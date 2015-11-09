@@ -59,7 +59,7 @@ public class ArticleController {
 		int id,pages;
 		pages = Integer.parseInt(request.getParameter("page"));
 		if((id = Integer.parseInt(request.getParameter("delete")))!=0){
-			articleService.movaToDusbin(id);
+			articleService.moveToDusbin(id);
 			try {
 				response.sendRedirect("http://localhost:8080/getarticle?page="+pages);
 			} catch (IOException e) {
