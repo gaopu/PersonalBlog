@@ -28,6 +28,8 @@
 
     <link href="css/screen.css" rel="stylesheet">
 
+    <link href="css/background.css" rel="stylesheet">
+
     <link href="http://cdn.bootcss.com/magnific-popup.js/1.0.0/magnific-popup.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
