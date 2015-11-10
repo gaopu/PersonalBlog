@@ -151,18 +151,29 @@ public class ArticleDaoImpl implements ArticleDao {
     @Override
     public int getRowCount() throws IOException {
         SqlSession sqlSession = MybatisUtils.getSession();
-        ArticleMapper articleMapper = sqlSession.getMapper(ArticleMapper.class);
-        int row = articleMapper.getRowCount();
-        sqlSession.commit();
-        return row;
+        try {
+            ArticleMapper articleMapper = sqlSession.getMapper(ArticleMapper.class);
+            int row = articleMapper.getRowCount();
+            sqlSession.commit();
+            return row;
+        }finally {
+            sqlSession.close();
+        }
+
+
     }
 
     @Override
     public List<Article> getPagedArticle(int offset, int size) throws IOException {
         SqlSession sqlSession = MybatisUtils.getSession();
-        ArticleMapper articleMapper = sqlSession.getMapper(ArticleMapper.class);
-        List<Article> list = articleMapper.getPagedArticle(offset,size);
-        sqlSession.commit();
-        return list;
+        try {
+            ArticleMapper articleMapper = sqlSession.getMapper(ArticleMapper.class);
+            List<Article> list = articleMapper.getPagedArticle(offset,size);
+            sqlSession.commit();
+            return list;
+        }finally {
+            sqlSession.close();
+        }
+
     }
 }

@@ -93,7 +93,7 @@
   var cancle = function(){
     var t = document.getElementById("classify");
     t.style.display="none";
-   // location.reload();
+    location.reload();
   };
   var xmlHttp;
   function createXMLHttp(){
