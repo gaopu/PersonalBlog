@@ -11,7 +11,7 @@
 <head>
   <title>评论页面</title>
   <link href="../resources/css/form.css" type="text/css" rel="stylesheet">
-  <script src="http://cdn.bootcss.com/jquery/3.0.0-alpha1/jquery.js"></script>
+  <script src="js/jquery-2.1.4.min.js"></script>
 </head>
 <body>
 <h1>${title}</h1><br>

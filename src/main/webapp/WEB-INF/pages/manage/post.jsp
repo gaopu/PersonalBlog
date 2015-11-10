@@ -1,36 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
-<%--&lt;%&ndash;--%>
-  <%--Created by IntelliJ IDEA.--%>
-  <%--User: geekgao--%>
-  <%--Date: 15-10-8--%>
-  <%--Time: 下午8:29--%>
-  <%--To change this template use File | Settings | File Templates.--%>
-<%--&ndash;%&gt;--%>
-<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
-<%--<html>--%>
-<%--<head>--%>
-    <%--<title></title>--%>
-<%--</head>--%>
-<%--<body>--%>
-<%--<form method="post" action="${pageContext.request.contextPath}/postedit">--%>
-    <%--题目:<input name="title"/><br/>--%>
-    <%--内容:<input name="content"/><br/>--%>
-
-    <%--类别:--%>
-    <%--<label>--%>
-        <%--<select name="category">--%>
-            <%--<c:forEach items="${categories}" var="category">--%>
-                <%--<option value="${category.id}">${category.name}</option>--%>
-            <%--</c:forEach>--%>
-        <%--</select>--%>
-    <%--</label>--%>
-    <%--<br>--%>
-
-    <%--<input type="submit"/>--%>
-<%--</form>--%>
-<%--</body>--%>
-<%--</html>--%>
 <%--
   Created by IntelliJ IDEA.
   User: geekgao
@@ -54,7 +22,7 @@
 
     <link href="../css/screen.css" rel="stylesheet">
 
-    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
 </head>
 
 <body>
@@ -92,6 +60,13 @@
 </script>
 
 <script>
+
+    $(document).ready(function() {
+        //清空最上面的导航栏目的ul中所有li的class属性
+        $("ul.navbar-nav li").attr("class","");
+        $("#postArticle").attr("class","active");
+    });
+
     $("#postBtn").click(function () {
         //检查所需要的内容是否都填写了
         if ($("#articleTitle").val() == "") {

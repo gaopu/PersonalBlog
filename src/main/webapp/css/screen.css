@@ -44,11 +44,12 @@ h6 {
     font-size: 0.75em;
 }
 a {
-    color: #e67e22;
+    /*color: #e67e22;*/
+    color: #333333;
     outline: none;
 }
 a:hover {
-    color: #e67e22;
+    /*color: #e67e22;*/
 }
 a:active,
 a:focus,
