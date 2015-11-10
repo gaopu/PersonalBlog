@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Spring MVC Form Handling</title>
-    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="js/jquery-2.1.4.min.js"></script>
 </head>
 <body>
 <h1>请登录:</h1>
@@ -25,7 +25,7 @@
         function post() {
             $.post($("#loginform").attr("action"), $("#loginform").serialize(), function (result) {
                 if (result == "success") {
-                    window.location.href = "manage";
+                    window.location.href = "${pageContext.request.contextPath}/";
                 } else {
                     $("#result").html(result);
                 }

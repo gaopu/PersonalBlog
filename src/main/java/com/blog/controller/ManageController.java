@@ -51,15 +51,6 @@ public class ManageController {
     }
 
     /**
-     * 文章管理页面
-     * @return
-     */
-    @RequestMapping(value = "postlist" , method = RequestMethod.GET)
-    public String articleManage() {
-        return "manage/postlist";
-    }
-
-    /**
      * 写博文页面
      * @return
      */

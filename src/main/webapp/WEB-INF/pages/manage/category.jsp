@@ -10,7 +10,6 @@
 <html>
 <head>
     <title>类别管理</title>
-    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
 </head>
 <body>
 <h1>类别信息</h1>
@@ -36,7 +35,6 @@
 <input id="txt"><input id="btnAdd" type="button" value="添加分类">
 <div id="mod"></div>
 <div id="msg"></div>
-<a href="${pageContext.request.contextPath}/">首页</a>
 
 <script type="text/javascript">
 

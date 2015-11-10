@@ -86,7 +86,6 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

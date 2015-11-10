@@ -6,17 +6,120 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
-    <title></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../images/favicon.ico">
+
+    <title>博客后台管理</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../css/dashboard.css" rel="stylesheet">
+
+    <link href="../css/screen.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
+
 <body>
-成功登录,这里是后台首页<br>
-<a href="post">发布博文</a><br>
-<a href="category">类别管理</a><br>
-<a href="deleted">回收站管理</a><br>
-<a href="configured">配置博客</a><br>
-<a href="getarticle?page=1">文章管理</a><br>
-<a href="${pageContext.request.contextPath}/">首页</a>
+<jsp:include page="../nav.jsp"/>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li id="articleLi" class="active"><a href="#">文章管理</a></li>
+                <li id="commentLi"><a href="#">评论管理</a></li>
+                <li id="configLi"><a href="#">博客配置</a></li>
+                <li id="categoryLi"><a href="#">类别管理</a></li>
+                <li id="deletedLi" ><a href="#">回收站</a></li>
+            </ul>
+        </div>
+        <div id="content" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function() {
+
+        //网页一进来就进入文章管理模块
+        $.get("getarticle?page=1",function(result){
+            $("#content").html(result);
+        });
+
+        //清空最上面的导航栏目的ul中所有li的class属性
+        $("ul.navbar-nav li").attr("class","");
+        $("#manageHome").attr("class","active");
+
+        //传进来被点击的li的id
+        function clickList (id) {
+            //清空class=nav-sidebar的ul中所有li的class属性
+            $("ul.nav-sidebar li").attr("class","");
+
+            if (id == "categoryLi") {
+                $.get("category",function(result){
+                    $("#content").html(result);
+                });
+                $("#" + id).attr("class","active");
+            } else if (id == "deletedLi") {
+                $.get("deleted",function(result){
+                    $("#content").html(result);
+                });
+                $("#" + id).attr("class","active");
+            } else if (id == "configLi") {
+                $.get("configured",function(result){
+                    $("#content").html(result);
+                });
+                $("#" + id).attr("class","active");
+            } else if (id == "commentLi") {
+//                $.get("deleted",function(result){
+//                    $("#content").html(result);
+//                });
+                $("#" + id).attr("class","active");
+            } else if (id == "articleLi") {
+                $.get("getarticle?page=1",function(result){
+                    $("#content").html(result);
+                });
+                $("#" + id).attr("class","active");
+            }
+        }
+
+        $("#categoryLi").click(function() {
+            clickList("categoryLi");
+        });
+        $("#deletedLi").click(function() {
+            clickList("deletedLi");
+        });
+        $("#configLi").click(function() {
+            clickList("configLi");
+        });
+        $("#commentLi").click(function() {
+            clickList("commentLi");
+        });
+        $("#articleLi").click(function() {
+            clickList("articleLi");
+        });
+    });
+</script>
 </body>
 </html>
+
