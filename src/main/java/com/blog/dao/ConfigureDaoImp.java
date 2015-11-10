@@ -17,17 +17,25 @@ public class ConfigureDaoImp implements ConfigureDao{
     @Override
     public Configure getConfigured() throws IOException {
         SqlSession sqlSession = MybatisUtils.getSession();
-        ConfigureMapper configureMapper = sqlSession.getMapper(ConfigureMapper.class);
-        Configure configured = configureMapper.getConfigured();
-        sqlSession.commit();
-        return configured;
+        try {
+            ConfigureMapper configureMapper = sqlSession.getMapper(ConfigureMapper.class);
+            Configure configured = configureMapper.getConfigured();
+            sqlSession.commit();
+            return configured;
+        }finally {
+            sqlSession.close();
+        }
+
     }
 
     @Override
     public void setConfigure(Configure configure) throws IOException {
         SqlSession sqlSession = MybatisUtils.getSession();
-        ConfigureMapper configureMapper = sqlSession.getMapper(ConfigureMapper.class);
-        configureMapper.setConfigure(configure);
-        sqlSession.commit();
+        try {
+            ConfigureMapper configureMapper = sqlSession.getMapper(ConfigureMapper.class);
+            configureMapper.setConfigure(configure);
+        }finally {
+            sqlSession.close();
+        }
     }
 }
