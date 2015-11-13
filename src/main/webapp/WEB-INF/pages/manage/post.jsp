@@ -1,36 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
-<%--&lt;%&ndash;--%>
-  <%--Created by IntelliJ IDEA.--%>
-  <%--User: geekgao--%>
-  <%--Date: 15-10-8--%>
-  <%--Time: 下午8:29--%>
-  <%--To change this template use File | Settings | File Templates.--%>
-<%--&ndash;%&gt;--%>
-<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
-<%--<html>--%>
-<%--<head>--%>
-    <%--<title></title>--%>
-<%--</head>--%>
-<%--<body>--%>
-<%--<form method="post" action="${pageContext.request.contextPath}/postedit">--%>
-    <%--题目:<input name="title"/><br/>--%>
-    <%--内容:<input name="content"/><br/>--%>
-
-    <%--类别:--%>
-    <%--<label>--%>
-        <%--<select name="category">--%>
-            <%--<c:forEach items="${categories}" var="category">--%>
-                <%--<option value="${category.id}">${category.name}</option>--%>
-            <%--</c:forEach>--%>
-        <%--</select>--%>
-    <%--</label>--%>
-    <%--<br>--%>
-
-    <%--<input type="submit"/>--%>
-<%--</form>--%>
-<%--</body>--%>
-<%--</html>--%>
 <%--
   Created by IntelliJ IDEA.
   User: geekgao
@@ -54,15 +22,15 @@
 
     <link href="../css/screen.css" rel="stylesheet">
 
-    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <link href="../css/background.css" rel="stylesheet">
 </head>
 
 <body>
 <%@include file="../nav.jsp"%>
 <!-- 加载编辑器的容器 -->
-<div class="container">
+<div class="container" style="padding: 0;background-color: #ffffff;margin-top: 40px;">
 
-    <div class="starter-template">
+    <div class="starter-template" style="padding: 15px;">
         <div class="input-group input-group" style="margin-bottom: 10px">
             <span class="input-group-addon" id="sizing-addon1">文章标题</span>
             <input id="articleTitle" type="text" class="form-control" placeholder="输入文章标题" aria-describedby="sizing-addon1">
@@ -92,6 +60,13 @@
 </script>
 
 <script>
+
+    $(document).ready(function() {
+        //清空最上面的导航栏目的ul中所有li的class属性
+        $("ul.navbar-nav li").attr("class","");
+        $("#postArticle").attr("class","active");
+    });
+
     $("#postBtn").click(function () {
         //检查所需要的内容是否都填写了
         if ($("#articleTitle").val() == "") {

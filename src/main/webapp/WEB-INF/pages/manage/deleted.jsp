@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%--
   Created by IntelliJ IDEA.
   User: geekgao
@@ -10,7 +11,6 @@
 <html>
 <head>
     <title>回收站</title>
-    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
 </head>
 <body>
 <table>
@@ -22,9 +22,11 @@
         <th style="width:120px;">操作</th>
     </tr>
     <c:forEach items="${articles}" var="article">
+        <%--定义时间变量，以供下面使用--%>
+        <c:set var="time" value="${article.time}" />
         <tr id="${article.id}">
             <th>${article.title}</th>
-            <th>${article.time}</th>
+            <th><fmt:formatDate value="${time}" pattern="yyyy年MM月dd日 HH:mm:ss"/></th>
             <th>${article.read_Num}</th>
             <th>${article.comment_Num}</th>
             <th>
@@ -34,7 +36,6 @@
         </tr>
     </c:forEach>
 </table>
-<a href="${pageContext.request.contextPath}">首页</a>
 
 <script>
 

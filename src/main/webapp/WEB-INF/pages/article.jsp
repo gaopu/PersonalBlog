@@ -9,75 +9,135 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <title>评论页面</title>
-  <link href="../resources/css/form.css" type="text/css" rel="stylesheet">
-  <script src="http://cdn.bootcss.com/jquery/3.0.0-alpha1/jquery.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
+    <title>${title}</title>
+    <link rel="icon" href="images/favicon.ico">
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link href="css/starter-template.css" rel="stylesheet">
+
+    <link href="css/screen.css" rel="stylesheet">
+    <link href="css/background.css" rel="stylesheet">
 </head>
 <body>
-<h1>${title}</h1><br>
-<div>${content}</div><br/>
+<jsp:include page="nav.jsp"/>
 
-<hr/>
-<div class="section_title">
-  <span>各种回音</span>
+<div class="container">
+    <div class="starter-template">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8" style="background-color: #ffffff;">
+                <h1>${title}</h1><br>
+                <div>${content}</div><br/>
+
+                <hr/>
+                <div class="section_title">
+                    <h3><span>评论:</span></h3>
+                </div>
+                <c:forEach items="${commentsList}" var="t">
+                    ${t.user_name} 说:<br/>
+                    ${t.content}<br/>
+                    ${t.time}<br/>
+
+                    <button class="btn-respond">回复</button>
+                    <div id="respond" class="container">
+                        <form action="${pageContext.request.contextPath}/editreply" method="post" id="commentform">
+                            <ul class="comment-l">
+                                <li style="height:28px;line-height: 28px;overflow: hidden">
+                                    <label for="content">评论内容：（必填）</label>
+                                </li>
+                                <li>
+                                    <textarea name="content" id="content" tabindex="1" aria-required="true"></textarea>
+                                </li>
+                                <li class="comment-btn">
+                                    <p>
+                                        ( Ctrl+Enter快速提交 )&nbsp;&nbsp;&nbsp;
+                                        <input name="submit" type="submit" id="submit" tabindex="5" value="写好了，发出去！" />
+                                    </p>
+                                </li>
+                            </ul>
+
+                            <ul class="comment-r">
+                                <li>
+                                    <label for="user_name">你的大名：（必填）</label>
+                                </li>
+                                <li>
+                                    <input type="text" name="user_name" id="user_name" size="25" tabindex="2" aria-required='true' />
+                                </li>
+                                <li>
+                                    <label for="user_email">邮箱地址：(必填)</label>
+                                </li>
+                                <li>
+                                    <input type="text" name="user_email" id="user_email" size="25" tabindex="3" aria-required='true' />
+                                </li>
+                                <li>
+                                    <input type="hidden" name="id" value="<%=request.getParameter("id")%>" />
+                                </li>
+                                <li>
+                                    <input type="hidden" name="comment_id" value="${t.id}" />
+                                </li>
+                            </ul>
+                        </form>
+                        <button class="btn-revoke">取消</button>
+                    </div>
+                    <br/>
+                    <c:forEach items="${replyList}" var="tr">
+                        <c:if test ="${tr.comment_id==t.id}">
+                            ${tr.user_name} 说:<br/>
+                            ${tr.content}
+                            ${tr.time}<br/>
+                        </c:if>
+                    </c:forEach>
+                    <br/>
+                    <br/>
+                </c:forEach>
+
+                <div id="respond">
+                    <form action="${pageContext.request.contextPath}/editcomment" method="post" id="commentform">
+                        <ul class="comment-l">
+                            <li style="height:28px;line-height: 28px;overflow: hidden">
+                                <label for="content">评论内容：（必填）</label>
+                            </li>
+                            <li>
+                                <textarea name="content" id="content" tabindex="1"></textarea>
+                            </li>
+                            <li class="comment-btn">
+                                <p>
+                                    ( Ctrl+Enter快速提交 )&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input name="submit" type="submit" id="submit" tabindex="5" value="写好了，发出去！">
+                                </p>
+                            </li>
+                        </ul>
+
+                        <ul class="comment-r">
+                            <li>
+                                <label for="user_name">你的大名：（必填）</label>
+                            </li>
+                            <li>
+                                <input type="text" name="user_name" id="user_name" size="25" tabindex="2" aria-required='true'>
+                            </li>
+                            <li>
+                                <label for="user_email">邮箱地址：(必填)</label>
+                            </li>
+                            <li>
+                                <input type="hidden" name="id" value="<%= request.getParameter("id") %>" />
+                            </li>
+                            <li>
+                                <input type="text" name="user_email" id="user_email" size="25" tabindex="3" aria-required='true'>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
 </div>
-<c:forEach items="${commentsList}" var="t">
-  ${t.user_name} 说:<br/>
-  ${t.content}<br/>
-  ${t.time}<br/>
-
-  <button class="btn-respond">回复</button>
-  <div id="respond" class="container">
-    <form action="${pageContext.request.contextPath}/editreply" method="post" id="commentform">
-      <ul class="comment-l">
-        <li style="height:28px;line-height: 28px;overflow: hidden">
-          <label for="content">评论内容：（必填）</label>
-        </li>
-        <li>
-          <textarea name="content" id="content" tabindex="1" aria-required="true"></textarea>
-        </li>
-        <li class="comment-btn">
-          <p>
-            ( Ctrl+Enter快速提交 )&nbsp;&nbsp;&nbsp;
-            <input name="submit" type="submit" id="submit" tabindex="5" value="写好了，发出去！" />
-          </p>
-        </li>
-      </ul>
-
-      <ul class="comment-r">
-        <li>
-          <label for="user_name">你的大名：（必填）</label>
-        </li>
-        <li>
-          <input type="text" name="user_name" id="user_name" size="25" tabindex="2" aria-required='true' />
-        </li>
-        <li>
-          <label for="user_email">邮箱地址：(必填)</label>
-        </li>
-        <li>
-          <input type="text" name="user_email" id="user_email" size="25" tabindex="3" aria-required='true' />
-        </li>
-        <li>
-          <input type="hidden" name="id" value="<%=request.getParameter("id")%>" />
-        </li>
-        <li>
-          <input type="hidden" name="comment_id" value="${t.id}" />
-        </li>
-      </ul>
-    </form>
-    <button class="btn-revoke">取消</button>
-  </div>
-  <br/>
-  <c:forEach items="${replyList}" var="tr">
-    <c:if test ="${tr.comment_id==t.id}">
-      ${tr.user_name} 说:<br/>
-      ${tr.content}
-      ${tr.time}<br/>
-    </c:if>
-  </c:forEach>
-  <br/>
-  <br/>
-</c:forEach>
 
 <script>
   $('.btn-respond').each(function(){
@@ -92,44 +152,5 @@
     });
   });
 </script>
-
-<div id="respond">
-  <form action="${pageContext.request.contextPath}/editcomment" method="post" id="commentform">
-    <ul class="comment-l">
-      <li style="height:28px;line-height: 28px;overflow: hidden">
-        <label for="content">评论内容：（必填）</label>
-      </li>
-      <li>
-        <textarea name="content" id="content" tabindex="1"></textarea>
-      </li>
-      <li class="comment-btn">
-        <p>
-          ( Ctrl+Enter快速提交 )&nbsp;&nbsp;&nbsp;&nbsp;
-          <input name="submit" type="submit" id="submit" tabindex="5" value="写好了，发出去！">
-        </p>
-      </li>
-    </ul>
-
-    <ul class="comment-r">
-
-
-    <li>
-      <label for="user_name">你的大名：（必填）</label>
-    </li>
-    <li>
-      <input type="text" name="user_name" id="user_name" size="25" tabindex="2" aria-required='true'>
-    </li>
-    <li>
-      <label for="user_email">邮箱地址：(必填)</label>
-    </li>
-      <li>
-        <input type="hidden" name="id" value="<%= request.getParameter("id") %>" />
-      </li>
-    <li>
-      <input type="text" name="user_email" id="user_email" size="25" tabindex="3" aria-required='true'>
-    </li>
-    </ul>
-  </form>
-</div>
 </body>
 </html>

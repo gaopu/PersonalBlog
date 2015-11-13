@@ -37,6 +37,22 @@ public class LoginController {
     }
 
     /**
+     * 登录页面
+     * @return
+     */
+    @RequestMapping(value = "logout" , method = RequestMethod.GET)
+    public @ResponseBody String logout(HttpSession session) throws IOException {
+        String flag = (String) session.getAttribute("flag");
+        //如果没有登录就不处理
+        if (flag == null) {
+            return "false";
+        }
+
+        session.invalidate();
+        return "success";
+    }
+
+    /**
      * 登录表单验证
      * @param session
      * @param response
