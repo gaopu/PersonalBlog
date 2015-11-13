@@ -22,15 +22,15 @@
 
     <link href="../css/screen.css" rel="stylesheet">
 
-    <script src="../js/jquery.min.js"></script>
+    <link href="../css/background.css" rel="stylesheet">
 </head>
 
 <body>
 <%@include file="../nav.jsp"%>
 <!-- 加载编辑器的容器 -->
-<div class="container">
+<div class="container" style="padding: 0;background-color: #ffffff;margin-top: 40px;">
 
-    <div class="starter-template">
+    <div class="starter-template" style="padding: 15px;">
         <div class="input-group input-group" style="margin-bottom: 10px">
             <span class="input-group-addon" id="sizing-addon1">文章标题</span>
             <input id="articleTitle" type="text" class="form-control" placeholder="输入文章标题" aria-describedby="sizing-addon1">
