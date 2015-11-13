@@ -160,7 +160,6 @@ public class ArticleDaoImpl implements ArticleDao {
             sqlSession.close();
         }
 
-
     }
 
     @Override
