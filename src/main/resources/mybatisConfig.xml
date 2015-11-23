@@ -8,8 +8,8 @@
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver" />
                 <property name="url" value="jdbc:mysql://localhost:3306/blog?useUnicode=true&amp;characterEncoding=UTF8" />
-                <property name="username" value="panlu" />
-                <property name="password" value="panlu" />
+                <property name="username" value="root" />
+                <property name="password" value="root" />
             </dataSource>
         </environment>
     </environments>
