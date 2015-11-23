@@ -91,9 +91,9 @@
                 });
                 $("#" + id).attr("class","active");
             } else if (id == "commentLi") {
-//                $.get("deleted",function(result){
-//                    $("#content").html(result);
-//                });
+                $.get("getcomment?page=1",function(result){
+                    $("#content").html(result);
+                });
                 $("#" + id).attr("class","active");
             } else if (id == "articleLi") {
                 $.get("getarticle?page=1",function(result){

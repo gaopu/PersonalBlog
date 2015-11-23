@@ -1,9 +1,11 @@
 package com.blog.controller;
 
+import com.blog.po.Article;
 import com.blog.po.Comment;
 import com.blog.service.ArticleService;
 import com.blog.service.CommentService;
 import com.blog.utils.BlogUtils;
+import com.blog.utils.PageParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -86,9 +89,44 @@ public class ComPostController {
         }
         //传入文章内容和标题
         model.addAttribute("content", content);
-        model.addAttribute("title",articleService.getTitle(idarc));
+        model.addAttribute("title", articleService.getTitle(idarc));
 
         return "article";
     }
 
+    @RequestMapping(value = "/manage/deletecomment", method = RequestMethod.POST)
+    public String setArticle(HttpServletRequest request)throws IOException{
+        String id = request.getParameter("delete");
+        int Iid = Integer.parseInt(id);
+        System.out.println("delete: "+Iid);
+        commentService.deleteReply(Iid);          //首先删除所有对该评论的回复再去删除评论
+        commentService.deleteCom(Iid);
+        return "manage/getcomment?page=1";
+    }
+
+    @RequestMapping(value = "/manage/getcomment" ,method = RequestMethod.GET)
+    public String getcomment(Model model,HttpServletRequest request) throws IOException {
+        List<Article> artlist;                //将所有的评论筛选出来
+        String currPageStr = request.getParameter("page");
+        System.out.println("Page:"+currPageStr);
+        int currPage = 1;
+        currPage = Integer.parseInt(currPageStr);
+        int totlerow = commentService.getCommentRow();    //总数
+        if (totlerow == 0){
+            return "manage/nullcomment";
+        }else {
+            PageParam pgm = new PageParam(); //传过去的就是一个页面
+            pgm.setRowCount(totlerow);
+            if (pgm.getTotalPage() < currPage){
+                currPage = pgm.getTotalPage();
+            }
+            pgm.setCurrPage(currPage);
+            pgm = commentService.pageOfComment(pgm);
+            artlist = articleService.getCommonArticle();
+            model.addAttribute("artlist",artlist);              //文章列表
+            model.addAttribute("onepagedate", pgm.getDatacom());
+            request.setAttribute("pageParam",pgm);
+        }
+        return "manage/comment";
+    }
 }
