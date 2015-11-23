@@ -1,6 +1,7 @@
 package com.blog.service;
 
 import com.blog.po.Comment;
+import com.blog.utils.PageParam;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,4 +19,14 @@ public interface CommentService {
 
     List<Comment> selectRep(int article_id) throws IOException;
 
+    List<Comment> selectAllCom() throws IOException;
+
+    void deleteCom(int id) throws IOException;
+
+    void deleteReply(int id) throws IOException;
+
+    int getCommentRow() throws IOException;
+
+    //分页时，获取一页的文章
+    PageParam pageOfComment(PageParam pageparam) throws IOException;
 }
