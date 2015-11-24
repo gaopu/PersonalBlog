@@ -59,65 +59,68 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="../js/bootstrap.min.js"></script>
 <script>
-    $(document).ready(function() {
+    //网页一进来就进入文章管理模块
+    $.get("getarticle?page=1",function(result){
+        $("#content").html(result);
+    });
 
-        //网页一进来就进入文章管理模块
-        $.get("getarticle?page=1",function(result){
+    //清空最上面的导航栏目的ul中所有li的class属性
+    $("ul.navbar-nav li").attr("class","");
+    $("#manageHome").attr("class","active");
+
+    function pageJump(requestUrl) {
+        $.get(requestUrl,function(result){
             $("#content").html(result);
         });
+    }
 
-        //清空最上面的导航栏目的ul中所有li的class属性
-        $("ul.navbar-nav li").attr("class","");
-        $("#manageHome").attr("class","active");
+    //传进来被点击的li的id
+    function clickList (id) {
+        //清空class=nav-sidebar的ul中所有li的class属性
+        $("ul.nav-sidebar li").attr("class","");
 
-        //传进来被点击的li的id
-        function clickList (id) {
-            //清空class=nav-sidebar的ul中所有li的class属性
-            $("ul.nav-sidebar li").attr("class","");
-
-            if (id == "categoryLi") {
-                $.get("category",function(result){
-                    $("#content").html(result);
-                });
-                $("#" + id).attr("class","active");
-            } else if (id == "deletedLi") {
-                $.get("deleted",function(result){
-                    $("#content").html(result);
-                });
-                $("#" + id).attr("class","active");
-            } else if (id == "configLi") {
-                $.get("configured",function(result){
-                    $("#content").html(result);
-                });
-                $("#" + id).attr("class","active");
-            } else if (id == "commentLi") {
-//                $.get("deleted",function(result){
-//                    $("#content").html(result);
-//                });
-                $("#" + id).attr("class","active");
-            } else if (id == "articleLi") {
-                $.get("getarticle?page=1",function(result){
-                    $("#content").html(result);
-                });
-                $("#" + id).attr("class","active");
-            }
+        if (id == "categoryLi") {
+            $.get("category",function(result){
+                $("#content").html(result);
+            });
+            $("#" + id).attr("class","active");
+        } else if (id == "deletedLi") {
+            $.get("deleted",function(result){
+                $("#content").html(result);
+            });
+            $("#" + id).attr("class","active");
+        } else if (id == "configLi") {
+            $.get("configured",function(result){
+                $("#content").html(result);
+            });
+            $("#" + id).attr("class","active");
+        } else if (id == "commentLi") {
+            $.get("getcomment?page=1",function(result){
+                $("#content").html(result);
+            });
+            $("#" + id).attr("class","active");
+        } else if (id == "articleLi") {
+            $.get("getarticle?page=1",function(result){
+                $("#content").html(result);
+            });
+            $("#" + id).attr("class","active");
         }
+    }
 
-        $("#categoryLi").click(function() {
-            clickList("categoryLi");
-        });
-        $("#deletedLi").click(function() {
-            clickList("deletedLi");
-        });
-        $("#configLi").click(function() {
-            clickList("configLi");
-        });
-        $("#commentLi").click(function() {
-            clickList("commentLi");
-        });
-        $("#articleLi").click(function() {
-            clickList("articleLi");
-        });
+    $("#categoryLi").click(function() {
+        clickList("categoryLi");
+    });
+    $("#deletedLi").click(function() {
+        clickList("deletedLi");
+    });
+    $("#configLi").click(function() {
+        clickList("configLi");
+    });
+    $("#commentLi").click(function() {
+        clickList("commentLi");
+    });
+    $("#articleLi").click(function() {
+        clickList("articleLi");
     });
 </script>
 </body>

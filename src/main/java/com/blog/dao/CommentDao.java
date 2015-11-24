@@ -21,4 +21,14 @@ public interface CommentDao {
 
     List<Comment> selectRep(int article_id) throws IOException;
 
+    List<Comment> selectAllCom() throws IOException;
+
+    void deleteCom(int id) throws IOException;
+
+    void deleteReply(int id) throws IOException;
+
+    int getCommentRow() throws IOException;
+
+    List<Comment> getPageComment(int offset,int size) throws IOException;
+
 }

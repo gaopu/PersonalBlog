@@ -68,4 +68,70 @@ public class CommentDaoImpl implements CommentDao {
         }
         return replyList;
     }
+
+    @Override
+    public List<Comment> selectAllCom() throws IOException {
+        List<Comment> allCom;
+        SqlSession session = MybatisUtils.getSession();
+        try {
+            CommentMapper mapper = session.getMapper(CommentMapper.class);
+            allCom = mapper.selectAllCom();
+            session.commit();
+        }finally {
+            session.close();
+        }
+        return allCom;
+    }
+
+    @Override
+    public void deleteCom(int id) throws IOException {
+        SqlSession session = MybatisUtils.getSession();
+        try {
+            CommentMapper mapper = session.getMapper(CommentMapper.class);
+            mapper.deleteCom(id);
+            session.commit();
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public void deleteReply(int id) throws IOException {
+        SqlSession session = MybatisUtils.getSession();
+        try {
+            CommentMapper mapper = session.getMapper(CommentMapper.class);
+            mapper.deleteReply(id);
+            session.commit();
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public int getCommentRow() throws IOException{
+        SqlSession session = MybatisUtils.getSession();
+        int row = 0;
+        try {
+            CommentMapper mapper = session.getMapper(CommentMapper.class);
+            row = mapper.getCommentRow();
+            session.commit();
+        }finally {
+            session.close();
+        }
+        return row;
+    }
+
+    @Override
+    public List<Comment> getPageComment(int offset, int size) throws IOException {
+        SqlSession session = MybatisUtils.getSession();
+        List<Comment> onePageOfAll = null;
+        try {
+            CommentMapper mapper = session.getMapper(CommentMapper.class);
+            onePageOfAll = mapper.getPageComment(offset,size);
+            session.commit();
+        }finally {
+            session.close();
+        }
+        return onePageOfAll;
+    }
 }
