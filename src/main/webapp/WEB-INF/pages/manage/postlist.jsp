@@ -61,7 +61,7 @@
     if(confirm("是否删除")){
       $.post("deleArticle",{id:id,page:<%=currPage%>},function(success){
           if(success=="success"){
-            location.reload();
+            //location.reload();
           }
       })
     }
@@ -82,8 +82,13 @@
 
     $.post("setCategory",{id:selectdId,b:b},function(success){
       if(success == "success"){
+        var t = document.getElementById("classify");
+        var inputs = t.getElementsByTagName("input");
+        var i;
+        for(i=0;i < inputs.length;i++){
+          inputs[i].checked=false;
+        }
         t.style.display="none";
-        location.reload();
       }
     })
   };
@@ -91,8 +96,12 @@
   //分类取消函数
   var cancle = function(){
     var t = document.getElementById("classify");
+    var inputs = t.getElementsByTagName("input");
+    var i;
     t.style.display="none";
-    location.reload();
+    for(i=0;i < inputs.length;i++){
+      inputs[i].checked=false;
+    }
   };
 
   //分类函数
