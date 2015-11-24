@@ -92,7 +92,7 @@ public class Comment {
     }
 
     public void setArticle_id(int article_id) {
-        this.article_id = comment_id;
+        this.article_id = article_id;
     }
 
     public int getComment_id() {

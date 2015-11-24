@@ -1,6 +1,7 @@
 package com.blog.utils;
 
 import com.blog.po.Article;
+import com.blog.po.Comment;
 
 import java.util.List;
 
@@ -12,9 +13,11 @@ public class PageParam {
 	
 	private int rowCount ; // 总记录数
 	
-	public static int pageSize = 2; // 页大小
+	public static int pageSize = 4; // 页大小
 
 	private List<Article> data ; // 数据
+
+	private List<Comment> datacom;   //评论的数据
 
 	public int getCurrPage() {
 		return currPage;
@@ -59,5 +62,13 @@ public class PageParam {
 
 	public void setData(List<Article> data) {
 		this.data = data;
+	}
+
+	public List<Comment> getDatacom() {
+		return datacom;
+	}
+
+	public void setDatacom(List<Comment> datacom) {
+		this.datacom = datacom;
 	}
 }
