@@ -63,7 +63,6 @@ public class ArticleController {
 	@RequestMapping(value = "getCategory")
 	public @ResponseBody String getCategory(@RequestParam int id,HttpServletResponse response) throws IOException {
 		List<Integer> category = categoryService.getCategoryByArticleId(id);
-		System.out.println(category.toString());
 		return category.toString();
 	}
 

@@ -23,7 +23,7 @@ public class ConfigureController {
 
     //获取文章配置
     @RequestMapping(value = "/configured",method = RequestMethod.GET)
-    public String getConfigured(ModelMap map,HttpServletResponse response) throws IOException {
+    public String getConfigured(ModelMap map) throws IOException {
         Configure configured = configureService.getConfigured();
         map.addAttribute("configured",configured);
         return "manage/settings";
@@ -31,7 +31,7 @@ public class ConfigureController {
 
     //设置文章配置
     @RequestMapping(value = "/setconfigure",method = RequestMethod.POST)
-    public void setConfigure(ModelMap map,HttpServletRequest request,HttpServletResponse response) throws IOException {
+    public void setConfigure(HttpServletRequest request,HttpServletResponse response) throws IOException {
         Configure configure = new Configure();
         configure.setHead(request.getParameter("head"));
         configure.setDescrib(request.getParameter("describ"));
@@ -39,10 +39,5 @@ public class ConfigureController {
         configure.setDisplay_num(Integer.parseInt(request.getParameter("display")));
         configure.setEmail_inform(Integer.parseInt(request.getParameter("isemail")));
         configureService.setConfigure(configure);
-        try {
-            response.sendRedirect("configured");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

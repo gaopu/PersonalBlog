@@ -34,6 +34,7 @@ public class ConfigureDaoImp implements ConfigureDao{
         try {
             ConfigureMapper configureMapper = sqlSession.getMapper(ConfigureMapper.class);
             configureMapper.setConfigure(configure);
+            sqlSession.commit();
         }finally {
             sqlSession.close();
         }
