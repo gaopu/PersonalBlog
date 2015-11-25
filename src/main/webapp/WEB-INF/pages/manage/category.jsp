@@ -48,8 +48,12 @@
         }
 
         if (isDo) {
-            $.get("deletecategory?id=" + id, function() {
-                $("#" + id).remove();
+            $.get("deletecategory?id=" + id, function(result) {
+                if (result == "success") {
+                    $("#" + id).remove();
+                } else {
+                    $("#msg").html("删除失败!");
+                }
             });
         }
     }
@@ -78,35 +82,35 @@
         $("#msg").html("");
     }
 
-    $(document).ready(function() {
-        function addCategory() {
-            //没输入内容就退出
-            if ($("#txt").val() == "") {
-                return;
-            }
 
-            $.get("addcategory?name=" + $("#txt").val(),function(result) {
-                if (result == "success") {
-                    $.get("getcategorylatestid",function(latestid) {
-                        $("#categorytab").append("<tr id=\"" + latestid + "\"><th>"+ $("#txt").val() +"</th><th>0</th><th><input id=\"btnDel\" type=\"button\" onclick=delCategory("+ latestid +",0) value=\"删除\"><input id=\"btnMod\" type=\"button\" onclick=\"modCategory(" + latestid + ",'" + $("#txt").val() + "')\" value=\"修改\"></th></tr>");
-                        $("#txt").val("");
-                        $("#msg").html("");
-                    });
-                } else if (result == "duplicate") {
-                    $("#msg").html("此类别已经存在");
-                }
-            });
+    function addCategory() {
+        //没输入内容就退出
+        if ($("#txt").val() == "") {
+            return;
         }
 
-        function keydown() {
-            if(event.keyCode == 13) {
-                addCategory();
+        $.get("addcategory?name=" + $("#txt").val(),function(result) {
+            if (result == "success") {
+                $.get("getcategorylatestid",function(latestid) {
+                    $("#categorytab").append("<tr id=\"" + latestid + "\"><th>"+ $("#txt").val() +"</th><th>0</th><th><input id=\"btnDel\" type=\"button\" onclick=delCategory("+ latestid +",0) value=\"删除\"><input id=\"btnMod\" type=\"button\" onclick=\"modCategory(" + latestid + ",'" + $("#txt").val() + "')\" value=\"修改\"></th></tr>");
+                    $("#txt").val("");
+                    $("#msg").html("");
+                });
+            } else if (result == "duplicate") {
+                $("#msg").html("此类别已经存在");
             }
-        }
+        });
+    }
 
-        $("#txt").keydown(keydown);
-        $("#btnAdd").click(addCategory);
-    });
+    function keydown() {
+        if(event.keyCode == 13) {
+            addCategory();
+        }
+    }
+
+    $("#txt").keydown(keydown);
+    $("#btnAdd").click(addCategory);
+
 </script>
 </body>
 </html>

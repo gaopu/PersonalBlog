@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.blog.utils.PageParam" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%>
@@ -9,32 +10,30 @@
   <title>文章管理</title>
 </head>
 <body>
-<form action="setArticle" method="post" id="setarticle">
   <table>
     <thead>
-    <th>标题</th>
-    <th>阅读</th>
-    <th>评论</th>
-    <th>编辑</th>
-    <th>删除</th>
-    <th>分类</th>
+    <th width="20%">标题</th>
+    <th width="30%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;时间</th>
+    <th width="10%">阅读</th>
+    <th width="10%">评论</th>
+    <th width="10%">&nbsp;&nbsp;编辑</th>
+    <th width="10%">&nbsp;&nbsp;删除</th>
+    <th width="10%">&nbsp;&nbsp;分类</th>
     </thead>
     <tbody>
     <c:forEach items="${pageParamData}" var="article">
       <tr>
-        <th>${article.title}(${article.time})</th>
-        <th>${article.read_Num}</th>
-        <th>${article.comment_Num}</th>
-        <th>编辑</th>
-        <th><a onclick="fun(${article.id})" href="#">删除</a></th>
-        <th><a onclick="showMsg(${article.id})" href="#">分类</a></th>
+        <th width="20%">${article.title}</th>
+        <th width="30%"><fmt:formatDate value="${article.time}" pattern="yyyy年MM月dd日 HH:mm:ss"/></th>
+        <th width="10%">&nbsp;${article.read_Num}</th>
+        <th width="10%">&nbsp;${article.comment_Num}</th>
+        <th width="10%"><input type="button" value="编辑"></th>
+        <th width="10%"><input type="button" onclick="dele(${article.id})" value="删除"></th>
+        <th width="10%"><input type="button" onclick="showMsg(${article.id})" value="分类"></th>
       </tr>
     </c:forEach>
     </tbody>
   </table>
-  <input type="hidden" name="delete" id="delete"/>
-  <input type="hidden" name="page" id="page"/>
-</form>
 <span>第</span>
 <%
   PageParam pageParam = (PageParam)request.getAttribute("pageParam");
@@ -44,7 +43,7 @@
     if(i == currPage){
 %><span style="background: #0000ff; padding: 0 5px; color: #ffffff";><%=currPage %></span><%
 }else{
-%><a href="getarticle?page=<%=i%>" style="padding: 0 5px"><%=i %></a><%
+%><a href="#" onclick="pageJump('getarticle?page=<%=i%>')" style="padding: 0 5px"><%=i %></a><%
     }
   }
 %>
@@ -59,14 +58,18 @@
 
 <script>
   var selectdId;//选择文章的id
+
   //删除函数
-  var fun = function (id){
+  var dele = function (id){
     if(confirm("是否删除")){
-      document.getElementById("delete").value = id;
-      document.getElementById("page").value = <%=currPage%>;
-      document.getElementById("setarticle").submit();
+      $.post("deleArticle",{id:id,page:<%=currPage%>},function(success){
+          if(success=="success"){
+            location.reload();
+          }
+      })
     }
   };
+
   //分类提交函数
   var submits = function(){
     var t = document.getElementById("classify");
@@ -79,52 +82,46 @@
       }
     }
     b = a.join(",");
-    createXMLHttp();
-    xmlHttp.onreadystatechange=function(){
-      t.style.display="none";
-      location.reload();
-    };
-    xmlHttp.open("post","setCategory",true);
-    xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
-    xmlHttp.send("id="+selectdId+"&b="+b);
+
+    $.post("setCategory",{id:selectdId,b:b},function(success){
+      if(success == "success"){
+        var t = document.getElementById("classify");
+        var inputs = t.getElementsByTagName("input");
+        var i;
+        for(i=0;i < inputs.length;i++){
+          inputs[i].checked=false;
+        }
+        t.style.display="none";
+      }
+    })
   };
 
   //分类取消函数
   var cancle = function(){
     var t = document.getElementById("classify");
+    var inputs = t.getElementsByTagName("input");
+    var i;
     t.style.display="none";
-    location.reload();
-  };
-  var xmlHttp;
-  function createXMLHttp(){
-    if(window.XMLHttpRequest){
-      xmlHttp=new XMLHttpRequest();
-    }else{
-      xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+    for(i=0;i < inputs.length;i++){
+      inputs[i].checked=false;
     }
-  }
+  };
+
   //分类函数
   function showMsg(id){
     selectdId = id;
-    createXMLHttp();
-    xmlHttp.onreadystatechange=showMsgCallback;
-    xmlHttp.open("post","getCategory",true);
-    xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
-    xmlHttp.send("id="+id);
-  }
-  function showMsgCallback(){
-    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+    $.post("getCategory",{id:id},function(category){
       var t = document.getElementById("classify");
       var inputs = t.getElementsByTagName("input");
-      var list = xmlHttp.responseText;
-      list = list.split(",");
+      var list = category.split(",");
       var i;
       for(i = 0; i < list.length;i++){
         inputs[list[i][1]-1].checked = true;
       }
       t.style.display = "block";
-    }
-  }
+    })
+  };
+
 </script>
 </body>
 </html>
