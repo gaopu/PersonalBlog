@@ -24,9 +24,11 @@
         <th>${article.title}(${article.time})</th>
         <th>${article.read_Num}</th>
         <th>${article.comment_Num}</th>
-        <th>编辑</th>
-        <th><a onclick="dele(${article.id})" href="#">删除</a></th>
-        <th><a onclick="showMsg(${article.id})" href="#">分类</a></th>
+        <th><input type="button" value="编辑"></th>
+       <%--<th><a onclick="dele(${article.id})" href="#">删除</a></th>--%>
+        <th><input type="button" onclick="dele(${article.id})" value="删除"></th>
+        <th><input type="button" onclick="showMsg(${article.id})" value="分类"></th>
+        <%--<th><a onclick="" href="#">分类</a></th>--%>
       </tr>
     </c:forEach>
     </tbody>
@@ -40,7 +42,7 @@
     if(i == currPage){
 %><span style="background: #0000ff; padding: 0 5px; color: #ffffff";><%=currPage %></span><%
 }else{
-%><a href="getarticle?page=<%=i%>" style="padding: 0 5px"><%=i %></a><%
+%><a href="#" onclick="pageJump('getarticle?page=<%=i%>')" style="padding: 0 5px"><%=i %></a><%
     }
   }
 %>
@@ -61,7 +63,7 @@
     if(confirm("是否删除")){
       $.post("deleArticle",{id:id,page:<%=currPage%>},function(success){
           if(success=="success"){
-            //location.reload();
+            location.reload();
           }
       })
     }
