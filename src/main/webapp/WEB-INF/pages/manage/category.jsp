@@ -13,7 +13,6 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<h1>类别信息</h1>
 <table id="categorytab">
     <tr>
         <th style="width:120px;">类别</th>
