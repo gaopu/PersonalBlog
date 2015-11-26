@@ -27,6 +27,8 @@ public interface CommentDao {
 
     void deleteReply(int id) throws IOException;
 
+    void delete(int id) throws IOException;
+
     int getCommentRow() throws IOException;
 
     List<Comment> getPageComment(int offset,int size) throws IOException;
