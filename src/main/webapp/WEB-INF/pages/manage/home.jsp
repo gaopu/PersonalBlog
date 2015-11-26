@@ -54,10 +54,6 @@
     </div>
 </div>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="../js/bootstrap.min.js"></script>
 <script>
     //网页一进来就进入文章管理模块
     $.get("getarticle?page=1",function(result){
