@@ -19,11 +19,11 @@ public interface ArticleMapper {
     int getLatestId();
 
     //挑选出没有被删除的文章
-    @Select("select * from article where deleted = 'n'")
+    @Select("select * from article where deleted = 'n' order by id DESC")
     List<Article> getCommonArticle();
 
     //挑选出被删除的文章
-    @Select("select * from article where deleted = 'y'")
+    @Select("select * from article where deleted = 'y' order by id DESC")
     List<Article> getDeletedArticle();
 
     @Select("select read_num from article where id=#{articleId}")
@@ -44,7 +44,7 @@ public interface ArticleMapper {
     @Select("select count(id) from article WHERE deleted = 'n'")
     int getRowCount();
     //获取文章
-    @Select("select * from article where deleted = 'n' limit #{offset}, #{size}")
+    @Select("select * from article where deleted = 'n' order by id DESC limit #{offset}, #{size}")
     List<Article> getPagedArticle(@Param("offset") int offset, @Param("size") int size);
 
 }

@@ -37,9 +37,9 @@
 <body>
 <jsp:include page="../nav.jsp"/>
 
-<div class="container-fluid">
+<div style="padding: 10px">
     <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
+        <div class="col-md-2">
             <ul class="nav nav-sidebar">
                 <li id="articleLi" class="active"><a href="#">文章管理</a></li>
                 <li id="commentLi"><a href="#">评论管理</a></li>
@@ -48,16 +48,10 @@
                 <li id="deletedLi" ><a href="#">回收站</a></li>
             </ul>
         </div>
-        <div id="content" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-
-        </div>
+        <div id="content" class="col-md-10"></div>
     </div>
 </div>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="../js/bootstrap.min.js"></script>
 <script>
     //网页一进来就进入文章管理模块
     $.get("getarticle?page=1",function(result){
