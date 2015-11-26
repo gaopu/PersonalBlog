@@ -175,4 +175,30 @@ public class ArticleDaoImpl implements ArticleDao {
         }
 
     }
+
+    @Override
+    public void delCategory(int id) throws IOException {
+        SqlSession sqlSession = MybatisUtils.getSession();
+        try {
+            ArticleMapper articleMapper = sqlSession.getMapper(ArticleMapper.class);
+            articleMapper.delCategory(id);
+            sqlSession.commit();
+        }finally {
+            sqlSession.close();
+        }
+
+    }
+
+    @Override
+    public void setCategory(int id, int selectedId) throws IOException {
+        SqlSession sqlSession = MybatisUtils.getSession();
+        try {
+            ArticleMapper articleMapper = sqlSession.getMapper(ArticleMapper.class);
+            articleMapper.setCategory(id,selectedId);
+            sqlSession.commit();
+        }finally {
+            sqlSession.close();
+        }
+
+    }
 }

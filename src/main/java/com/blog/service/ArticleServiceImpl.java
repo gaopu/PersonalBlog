@@ -121,4 +121,12 @@ public class ArticleServiceImpl implements ArticleService {
 
         return pageParam;
     }
+
+    @Override
+    public void setCategory(int id, int[] selectedId) throws IOException {
+        articleDao.delCategory(id);
+        for (int i = 0; i < selectedId.length;i++){
+            articleDao.setCategory(id,selectedId[i]);
+        }
+    }
 }

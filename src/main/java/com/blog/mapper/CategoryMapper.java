@@ -44,13 +44,9 @@ public interface CategoryMapper {
     //获取文章分类
     @Select("select id from category where id in(select category_id from article_category where article_id=#{id})")
     List<Integer> getCategoryByArticleId(int id);
+
     //获得全部分类
-    @Select("select name from category")
+    @Select("select name from category where id!= 1")
     List<String> getAllCategory();
-    //删除文章分类
-    @Delete("delete from article_category where article_id = #{id}")
-    void delCategory(int id);
-    //设置新的文章分类
-    @Insert("insert into article_category(article_id,category_id) values(#{id},#{selectedId})")
-    void setCategory(@Param("id") int id, @Param("selectedId") int selectedId);
+
 }
