@@ -108,6 +108,18 @@ public class CommentDaoImpl implements CommentDao {
     }
 
     @Override
+    public void delete(int id) throws IOException {
+        SqlSession session = MybatisUtils.getSession();
+        try {
+            CommentMapper mapper = session.getMapper(CommentMapper.class);
+            mapper.delete(id);
+            session.commit();
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
     public int getCommentRow() throws IOException{
         SqlSession session = MybatisUtils.getSession();
         int row = 0;

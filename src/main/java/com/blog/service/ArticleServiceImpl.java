@@ -2,7 +2,9 @@ package com.blog.service;
 
 import com.blog.dao.ArticleCategoryDao;
 import com.blog.dao.ArticleDao;
+import com.blog.dao.CommentDao;
 import com.blog.po.Article;
+import com.blog.po.Comment;
 import com.blog.utils.PageParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,8 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleDao articleDao;
     @Autowired
     private ArticleCategoryDao articleCategoryDao;
+    @Autowired
+    private CommentDao commentDao;
 
     @Override
     public int getAuthorId(int id) throws IOException {
@@ -78,7 +82,21 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public void delete(int articleId) throws IOException {
+        //删除文章的分类信息
         articleCategoryDao.delete(articleId);
+
+        /*删除文章的评论信息*/
+        //删除本文章所有的评论的回复
+        List<Comment> replies = commentDao.selectRep(articleId);
+        for (Comment r:replies) {
+            commentDao.delete(r.getId());
+        }
+        //删除本文章所有的评论
+        List<Comment> comments = commentDao.selectCom(articleId);
+        for (Comment c:comments) {
+            commentDao.delete(c.getId());
+        }
+        //删除文章
         articleDao.delete(articleId);
     }
 

@@ -28,7 +28,7 @@
                 <%
                     } else {
                 %>
-                <li><a href="#" data-toggle="modal" data-target="#myModal">管理员登录</a></li>
+                <li><a id="showModal" href="#" data-toggle="modal" data-target="#myModal">管理员登录</a></li>
                 <%
                     }
                 %>
@@ -47,17 +47,18 @@
                     <div class="input-group-addon">
                         <i class="glyphicon glyphicon-envelope"></i>
                     </div>
-                    <input id="email" type="email" name="email" class="form-control" placeholder="Email address" required autofocus/>
+                    <input id="loginemail" type="email" name="email" class="form-control" placeholder="Email address" required autofocus/>
                 </div>
                 <div class="input-group" style="padding: 10px;">
                     <div class="input-group-addon">
                         <i class="glyphicon glyphicon-lock"></i>
                     </div>
-                    <input id="passwd" type="password" name="passwd" class="form-control" placeholder="Password" required/>
+                    <input id="loginpasswd" type="password" name="passwd" class="form-control" placeholder="Password" required/>
                 </div>
                 <div class="input-group" style="padding: 10px;margin: auto;">
                     <input id="submit" class="btn btn-success" type="button" value="登录" style="width: 100px">
                 </div>
+                <div id = "loginresult"></div>
             </form>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
@@ -73,11 +74,19 @@
         $("#logout").click(function() {
             $.get("${pageContext.request.contextPath}/logout",function(result){
                 if (result == "success") {
-                    location.reload();
+                    window.location.href = "${pageContext.request.contextPath}/";
                 }
             });
         });
     });
+</script>
+
+<script>
+    $("#showModal").click(clearResult);
+    function clearResult() {
+        $("#loginresult").html("");
+    }
+
 </script>
 
 <%--登录模态框里面的事件--%>
@@ -88,7 +97,7 @@
                 if (result == "success") {
                     location.reload();
                 } else {
-                    $("#result").html(result);
+                    $("#loginresult").html(result);
                 }
             });
         }
@@ -99,8 +108,8 @@
             }
         }
 
-        $("#email").keydown(keydown);
-        $("#passwd").keydown(keydown);
+        $("#loginemail").keydown(keydown);
+        $("#loginpasswd").keydown(keydown);
         $("#submit").click(post);
     });
 </script>

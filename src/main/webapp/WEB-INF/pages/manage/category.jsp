@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>类别管理</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <h1>类别信息</h1>
@@ -25,19 +26,21 @@
                 <th id="${category.name}">${category.name}</th>
                 <th>${categoryId_count[category.id]}</th>
                 <th>
-                    <input id="btnDel" type="button" onclick="delCategory(${category.id},${categoryId_count[category.id]})" value="删除">
-                    <input id="btnMod" type="button" onclick="modCategory(${category.id},'${category.name}')" value="修改">
+                    <input id="btnDel" class="btn btn-danger" type="button" onclick="delCategory(${category.id},${categoryId_count[category.id]})" value="删除">
+                    <input id="btnMod" class="btn btn-info" type="button" onclick="modCategory(${category.id},'${category.name}',${categoryId_count[category.id]})" value="修改">
                 </th>
             </tr>
         </c:if>
     </c:forEach>
 </table>
-<input id="txt"><input id="btnAdd" type="button" value="添加分类">
+<input id="txt" type="text">
+<input id="btnAdd" class="btn btn-success" type="button" value="添加">
 <div id="mod"></div>
 <div id="msg"></div>
 
 <script type="text/javascript">
 
+    //点击删除后
     function delCategory(id, num) {
         var isDo = false;
 
@@ -59,18 +62,23 @@
     }
 
     //点击修改按钮之后
-    function modCategory(categoryid,name) {
-        $("#mod").html("名称:<input id='modtxt' type='text'><input id='btnsavemod' type='button' value='保存' onclick=saveMod(" + categoryid + ",'" + name + "')><input id='btncancelmod' type='button' value='取消' onclick='cancelmod()'>");
+    function modCategory(categoryid,name,articleCount) {
+        $("#mod").html("新名称:<br><input id='modtxt' type='text'> <input id='btnsavemod' class=\"btn btn-success\" type='button' value='保存' onclick=saveMod(" + categoryid + ",'" + name + "'," + articleCount + ")> <input id='btncancelmod' class=\"btn\" type='button' value='取消' onclick='cancelmod()'>");
         $("#modtxt").val(name);
     }
 
     //点击保存之后
-    function saveMod(categoryid,name) {
+    function saveMod(categoryid,name,articleCount) {
         $.get("updatecategory?id=" + categoryid + "&name=" + $("#modtxt").val(),function(result) {
+            var newName = $("#modtxt").val();
             if (result == "duplicate") {
                 $("#msg").html("此类别已经存在");
             } else {
-                $("#" + name).html($("#modtxt").val());
+                //将id为categoryid的元素内容清空
+                $("#" + categoryid).html("");
+                //重新添加内容
+                $("#" + categoryid).html("<th id=\"" + newName + "\">" + newName + "</th> <th>" + articleCount + "</th> <th> <input id=\"btnDel\" class=\"btn btn-danger\" type=\"button\" onclick=\"delCategory(" + categoryid + "," + articleCount + ")\" value=\"删除\"> <input id=\"btnMod\" class=\"btn btn-info\" type=\"button\" onclick=\"modCategory(" + categoryid + ",'" + newName + "'," + articleCount + ")\" value=\"修改\"> </th>");
+//                $("#" + categoryid).html('<th id="' + newName + '">' + newName + '</th><th>' + articleCount + '</th><th><input id="btnDel" class="btn btn-danger" type="button" onclick="delCategory(' + categoryid + ',' + articleCount + ')" value="删除"> <input id="btnMod" class="btn btn-info" type="button" onclick="modCategory(' + categoryid + ',\"' + newName + '\"' + articleCount + ')\" value=\"修改\"></th>');
                 cancelmod();
                 $("#msg").html("");
             }
@@ -82,7 +90,7 @@
         $("#msg").html("");
     }
 
-
+    //点击添加分类按钮之后
     function addCategory() {
         //没输入内容就退出
         if ($("#txt").val() == "") {
@@ -92,12 +100,14 @@
         $.get("addcategory?name=" + $("#txt").val(),function(result) {
             if (result == "success") {
                 $.get("getcategorylatestid",function(latestid) {
-                    $("#categorytab").append("<tr id=\"" + latestid + "\"><th>"+ $("#txt").val() +"</th><th>0</th><th><input id=\"btnDel\" type=\"button\" onclick=delCategory("+ latestid +",0) value=\"删除\"><input id=\"btnMod\" type=\"button\" onclick=\"modCategory(" + latestid + ",'" + $("#txt").val() + "')\" value=\"修改\"></th></tr>");
+                    $("#categorytab").append("<tr id=\"" + latestid + "\"><th>"+ $("#txt").val() +"</th><th>0</th><th><input id=\"btnDel\" class=\"btn btn-danger\" type=\"button\" onclick=delCategory("+ latestid +",0) value=\"删除\"> <input id=\"btnMod\" class=\"btn btn-info\" type=\"button\" onclick=\"modCategory(" + latestid + ",'" + $("#txt").val() + "')\" value=\"修改\"></th></tr>");
                     $("#txt").val("");
                     $("#msg").html("");
                 });
             } else if (result == "duplicate") {
                 $("#msg").html("此类别已经存在");
+            } else {
+                $("#msg").html("修改出错");
             }
         });
     }
