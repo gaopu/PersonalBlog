@@ -39,8 +39,9 @@ public interface CategoryDao {
     int getLatestId() throws IOException;
 
     void update(String id, String newName) throws IOException;
+
     public List<Integer> getCategoryByArticleId(int id) throws IOException;
+
     public List<String> getAllCategory() throws IOException;
-    public void delCategory(int id) throws IOException;
-    public void setCategory(int id, int selectedId) throws IOException;
+
 }

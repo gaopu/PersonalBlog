@@ -45,7 +45,10 @@ public interface ArticleDao {
     void recover(int articleId) throws IOException;
 
     int getRowCount() throws IOException;
-    List<Article> getPagedArticle(int offset, int size) throws IOException;
-//    public void deleteArticle(int id) throws IOException;
 
+    List<Article> getPagedArticle(int offset, int size) throws IOException;
+
+    public void delCategory(int id) throws IOException;
+
+    public void setCategory(int id, int selectedId) throws IOException;
 }

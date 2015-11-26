@@ -85,13 +85,7 @@
 
     $.post("setCategory",{id:selectdId,b:b},function(success){
       if(success == "success"){
-        var t = document.getElementById("classify");
-        var inputs = t.getElementsByTagName("input");
-        var i;
-        for(i=0;i < inputs.length;i++){
-          inputs[i].checked=false;
-        }
-        t.style.display="none";
+       cancle();
       }
     })
   };
@@ -109,14 +103,18 @@
 
   //分类函数
   function showMsg(id){
+    cancle();
     selectdId = id;
     $.post("getCategory",{id:id},function(category){
       var t = document.getElementById("classify");
       var inputs = t.getElementsByTagName("input");
-      var list = category.split(",");
       var i;
+      for (i = 0; i < inputs.length;i++){
+        inputs[i] = false;
+      }
+      var list = category.split(",");
       for(i = 0; i < list.length;i++){
-        inputs[list[i][1]-1].checked = true;
+        inputs[list[i][1]-2].checked = true;
       }
       t.style.display = "block";
     })
