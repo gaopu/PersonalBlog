@@ -1,11 +1,16 @@
 package com.blog.Filter;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebInitParam;
 import java.io.IOException;
 
 /**
  * Created by geekgao on 15-10-16.
  */
+@WebFilter(urlPatterns = {"/*"},initParams = {
+        @WebInitParam(name = "encoding",value = "UTF-8")
+})
 public class EncodingFilter implements Filter {
 
     private String encoding;
