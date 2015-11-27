@@ -106,12 +106,13 @@
     cancle();
     selectdId = id;
     $.post("getCategory",{id:id},function(category){
+      if(category=="[]"){
+        var t = document.getElementById("classify");
+        t.style.display = "block";
+      }
       var t = document.getElementById("classify");
       var inputs = t.getElementsByTagName("input");
       var i;
-      for (i = 0; i < inputs.length;i++){
-        inputs[i] = false;
-      }
       var list = category.split(",");
       for(i = 0; i < list.length;i++){
         inputs[list[i][1]-2].checked = true;

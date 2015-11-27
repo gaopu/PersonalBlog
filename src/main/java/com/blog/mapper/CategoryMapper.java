@@ -42,7 +42,7 @@ public interface CategoryMapper {
     void update(String id, String newName);
 
     //获取文章分类
-    @Select("select id from category where id in(select category_id from article_category where article_id=#{id})")
+    @Select("select id from category where id in(select category_id from article_category where article_id=#{id} and category_id != 1)")
     List<Integer> getCategoryByArticleId(int id);
 
     //获得全部分类
