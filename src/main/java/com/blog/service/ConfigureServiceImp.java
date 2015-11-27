@@ -5,6 +5,7 @@ import com.blog.po.Configure;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
@@ -18,7 +19,9 @@ public class ConfigureServiceImp implements ConfigureService{
     public Configure getConfigured() throws IOException {
         return dao.getConfigured();
     }
-    public void setConfigure(Configure configure) throws IOException {
+    public void setConfigure(HttpServletRequest request,Configure configure) throws IOException {
         dao.setConfigure(configure);
+        //确保导航栏显示的博客名称一直是最新的
+        request.getServletContext().setAttribute("blogName",configure.getHead());
     }
 }
