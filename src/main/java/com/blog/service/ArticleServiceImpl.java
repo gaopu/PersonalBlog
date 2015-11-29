@@ -26,6 +26,11 @@ public class ArticleServiceImpl implements ArticleService {
     private CommentDao commentDao;
 
     @Override
+    public List<Article> getAllArticle() throws IOException {
+        return articleDao.getAllArticle();
+    }
+
+    @Override
     public int getAuthorId(int id) throws IOException {
         return articleDao.getAuthorId(id);
     }

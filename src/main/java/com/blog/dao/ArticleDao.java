@@ -18,6 +18,7 @@ public interface ArticleDao {
 
     int getAuthorId(int id) throws IOException;
 
+    List<Article> getAllArticle()throws IOException;
     /**
      * 获取没有被删除的正常文章
      * @return
