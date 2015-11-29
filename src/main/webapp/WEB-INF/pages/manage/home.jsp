@@ -53,6 +53,7 @@
         <div id="content" class="col-md-10" style="height: 100%;background-color: #f7f7f7"></div>
     </div>
 </div>
+<%--<a href="#" onclick="PageJump('getcomment?page=1')" style="padding: 0 5px"><%=1%></a>--%>
 
 <script>
     //网页一进来就进入文章管理模块

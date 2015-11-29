@@ -46,7 +46,7 @@
 
                     <button class="btn-respond">回复</button>
                     <div id="respond" class="container">
-                        <form action="${pageContext.request.contextPath}/editreply" method="post" id="commentform">
+                        <form action="${pageContext.request.contextPath}/editreply" method="post" id="commentform" name="commentform" onsubmit="return mail_test(this);">
                             <ul class="comment-l">
                                 <li style="height:28px;line-height: 28px;overflow: hidden">
                                     <label for="content">评论内容：（必填）</label>
@@ -57,7 +57,7 @@
                                 <li class="comment-btn">
                                     <p>
                                         ( Ctrl+Enter快速提交 )&nbsp;&nbsp;&nbsp;
-                                        <input name="submit" type="submit" id="submit" tabindex="5" value="写好了，发出去！" />
+                                        <input name="submit" type="submit" id="submit" value="写好了，发出去！" />
                                     </p>
                                 </li>
                             </ul>
@@ -73,7 +73,7 @@
                                     <label for="user_email">邮箱地址：(必填)</label>
                                 </li>
                                 <li>
-                                    <input type="text" name="user_email" id="user_email" size="25" tabindex="3" aria-required='true' />
+                                    <input type="text" name="user_email" id="user_email" size="25" tabindex="3" aria-required="true" />
                                 </li>
                                 <li>
                                     <input type="hidden" name="id" value="<%=request.getParameter("id")%>" />
@@ -124,6 +124,9 @@
                             <li>
                                 <label for="user_email">邮箱地址：(必填)</label>
                             </li>
+                            <%--<li>--%>
+                                <%--<input type="text" name="user_email" size="30">--%>
+                            <%--</li>--%>
                             <li>
                                 <input type="hidden" name="id" value="<%= request.getParameter("id") %>" />
                             </li>
@@ -139,7 +142,20 @@
     </div>
 </div>
 
-<script>
+<script type="text/javascript">
+
+   //验证邮箱的正确性
+function mail_test(thisform) {
+    with (thisform) {
+    user_email = commentform.user_email.value;
+    if (!/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(user_email)) {
+        alert("邮箱格式错误");
+        commentform.user_email.focus();
+        return false
+    }else{return true}
+    }
+}
+
   $('.btn-respond').each(function(){
     $(this).click(function(){
       $(this).next().css('display', 'block');
@@ -151,6 +167,8 @@
       $(this).parent().css('display','none');
     });
   });
+
+
 </script>
 </body>
 </html>
