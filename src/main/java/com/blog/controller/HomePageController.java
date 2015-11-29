@@ -24,8 +24,6 @@ public class HomePageController {
     private ArticleService articleService;
     @Autowired
     private AdminService adminService;
-    @Autowired
-    private ConfigureService configureService;
 
     @RequestMapping(value = "",method = RequestMethod.GET)
     public String getIndex(Model model) throws IOException {

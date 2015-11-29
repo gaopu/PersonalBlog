@@ -16,7 +16,7 @@
 <form action="setconfigure" method="post" id="set">
   <%Configure configure = (Configure) request.getAttribute("configured");%>
       博客标题<br>
-      <input type="text" name="head" value="<%=configure.getHead()%>"/><br><br>
+      <input id="blogNameInput" type="text" name="head" value="<%=configure.getHead()%>"/><br><br>
       博客描述<br>
       <input type="text" name="describ" value="<%=configure.getDescrib()%>"/><br><br>
       编辑器类型<br>
@@ -40,7 +40,9 @@
 
 <script>
    var sub = function(){
-       $.post("setconfigure",$("#set").serialize())
+       $.post("setconfigure",$("#set").serialize());
+       var newName = $("#blogNameInput").val();
+       $("#blogName").html(newName);
    };
   //分别获取数据库中的值
     var edit_type = '<%=configure.getEdit_type()%>';

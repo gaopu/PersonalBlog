@@ -31,13 +31,13 @@ public class ConfigureController {
 
     //设置文章配置
     @RequestMapping(value = "/setconfigure",method = RequestMethod.POST)
-    public void setConfigure(HttpServletRequest request,HttpServletResponse response) throws IOException {
+    public void setConfigure(HttpServletRequest request) throws IOException {
         Configure configure = new Configure();
         configure.setHead(request.getParameter("head"));
         configure.setDescrib(request.getParameter("describ"));
         configure.setEdit_type(Integer.parseInt(request.getParameter("editor")));
         configure.setDisplay_num(Integer.parseInt(request.getParameter("display")));
         configure.setEmail_inform(Integer.parseInt(request.getParameter("isemail")));
-        configureService.setConfigure(configure);
+        configureService.setConfigure(request,configure);
     }
 }
