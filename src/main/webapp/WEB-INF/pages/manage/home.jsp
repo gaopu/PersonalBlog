@@ -53,6 +53,7 @@
         </div>
     </div>
 </div>
+<%--<a href="#" onclick="PageJump('getcomment?page=1')" style="padding: 0 5px"><%=1%></a>--%>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
