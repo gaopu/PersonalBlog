@@ -98,7 +98,6 @@ public class ComPostController {
     public String setArticle(HttpServletRequest request)throws IOException{
         String id = request.getParameter("delete");
         int Iid = Integer.parseInt(id);
-        System.out.println("delete: "+Iid);
         commentService.deleteReply(Iid);          //首先删除所有对该评论的回复再去删除评论
         commentService.deleteCom(Iid);
         return "manage/getcomment?page=1";
@@ -108,7 +107,6 @@ public class ComPostController {
     public String getcomment(Model model,HttpServletRequest request) throws IOException {
         List<Article> artlist;                //将所有的评论筛选出来
         String currPageStr = request.getParameter("page");
-        System.out.println("Page:"+currPageStr);
         int currPage = 1;
         currPage = Integer.parseInt(currPageStr);
         int totlerow = commentService.getCommentRow();    //总数
