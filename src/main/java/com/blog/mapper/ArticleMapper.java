@@ -50,4 +50,11 @@ public interface ArticleMapper {
     @Select("select * from article where deleted = 'n' order by id DESC limit #{offset}, #{size}")
     List<Article> getPagedArticle(@Param("offset") int offset, @Param("size") int size);
 
+    //删除旧的文章分类
+    @Delete("delete from article_category where article_id = #{id}")
+    void delCategory(int id);
+
+    //设置新的文章分类
+    @Insert("insert into article_category(article_id,category_id) values(#{id},#{selectedId})")
+    void setCategory(@Param("id") int id, @Param("selectedId") int selectedId);
 }

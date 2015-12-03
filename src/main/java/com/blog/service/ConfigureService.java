@@ -11,8 +11,7 @@ import java.io.IOException;
 //博客配置功能
 public interface ConfigureService {
     //获得博客配置
-    public Configure getConfigured() throws IOException;
+    Configure getConfigured() throws IOException;
     //设置博客配置
-    public void setConfigure(HttpServletRequest request,Configure configure) throws IOException;
-
+    void setConfigure(Configure configure) throws IOException;
 }

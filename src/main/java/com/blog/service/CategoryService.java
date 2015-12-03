@@ -49,6 +49,5 @@ public interface CategoryService {
     public List<Integer> getCategoryByArticleId(int id) throws IOException;
     //获得全部文章的分类
     public List<String> getAllCategory() throws IOException;
-    //设置文章分类
-    public void setCategory(int id, int[] selectedId) throws IOException;
+
 }

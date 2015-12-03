@@ -13,7 +13,7 @@ public class PageParam {
 	
 	private int rowCount ; // 总记录数
 	
-	public static int pageSize = 4; // 页大小
+	public static int pageSize = 2; // 页大小
 
 	private List<Article> data ; // 数据
 

@@ -97,7 +97,7 @@
             });
             $("#" + id).attr("class","active");
         } else if (id == "articleLi") {
-            $.get("getarticle?page=1",function(result){
+            $.get("getarticle",function(result){
                 $("#content").html(result);
             });
             $("#" + id).attr("class","active");

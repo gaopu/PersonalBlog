@@ -27,7 +27,7 @@
         <th width="30%"><fmt:formatDate value="${article.time}" pattern="yyyy年MM月dd日 HH:mm:ss"/></th>
         <th width="10%">&nbsp;${article.read_Num}</th>
         <th width="10%">&nbsp;${article.comment_Num}</th>
-        <th width="10%"><input type="button" value="编辑"></th>
+        <th width="10%"><input type="button" onclick="edit(${article.id})" value="编辑"></th>
         <th width="10%"><input type="button" onclick="dele(${article.id})" value="删除"></th>
         <th width="10%"><input type="button" onclick="showMsg(${article.id})" value="分类"></th>
       </tr>
@@ -59,12 +59,16 @@
 <script>
   var selectdId;//选择文章的id
 
+  //编辑函数
+  var edit = function(id){
+
+  };
   //删除函数
   var dele = function (id){
     if(confirm("是否删除")){
       $.post("deleArticle",{id:id,page:<%=currPage%>},function(success){
           if(success=="success"){
-            location.reload();
+            pageJump('getarticle?page='+<%=currPage%>);
           }
       })
     }
@@ -85,13 +89,7 @@
 
     $.post("setCategory",{id:selectdId,b:b},function(success){
       if(success == "success"){
-        var t = document.getElementById("classify");
-        var inputs = t.getElementsByTagName("input");
-        var i;
-        for(i=0;i < inputs.length;i++){
-          inputs[i].checked=false;
-        }
-        t.style.display="none";
+       cancle();
       }
     })
   };
@@ -109,14 +107,19 @@
 
   //分类函数
   function showMsg(id){
+    cancle();
     selectdId = id;
     $.post("getCategory",{id:id},function(category){
+      if(category=="[]"){
+        var t = document.getElementById("classify");
+        t.style.display = "block";
+      }
       var t = document.getElementById("classify");
       var inputs = t.getElementsByTagName("input");
-      var list = category.split(",");
       var i;
+      var list = category.split(",");
       for(i = 0; i < list.length;i++){
-        inputs[list[i][1]-1].checked = true;
+        inputs[list[i][1]-2].checked = true;
       }
       t.style.display = "block";
     })

@@ -29,8 +29,10 @@ public class ArticleController {
 	@RequestMapping(value = "/getarticle",method = RequestMethod.GET)
 	public String getArticle(Model map,HttpServletRequest request) throws IOException {
 		String currPageStr = request.getParameter("page");
-		int currPage = 1;
-		currPage = Integer.parseInt(currPageStr);
+		if(currPageStr==null){
+			currPageStr="1";
+		}
+		int currPage = Integer.parseInt(currPageStr);
 		// 获取总记录数
 		int rowCount = articleService.getRowCount();
 		if(rowCount==0){
@@ -74,7 +76,7 @@ public class ArticleController {
 		for(int i = 0; i < arr.length;i++){
 			selectId[i]=Integer.parseInt(arr[i]);
 		}
-		categoryService.setCategory(id,selectId);
+		articleService.setCategory(id, selectId);
 		return "success";
 	}
 }

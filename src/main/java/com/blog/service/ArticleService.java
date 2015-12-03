@@ -44,5 +44,6 @@ public interface ArticleService {
     public int getRowCount() throws IOException;
     //分页获得配置的文章
     public PageParam getPagedArticle(PageParam pageParam) throws IOException;
-
+    //设置文章分类
+    public void setCategory(int id, int[] selectedId) throws IOException;
 }

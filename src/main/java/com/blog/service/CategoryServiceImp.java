@@ -67,11 +67,4 @@ public class CategoryServiceImp implements CategoryService {
         return categoryDao.getAllCategory();
     }
 
-    @Override
-    public void setCategory(int id, int[] selectedId) throws IOException {
-        categoryDao.delCategory(id);
-        for (int i = 0; i < selectedId.length;i++){
-            categoryDao.setCategory(id,selectedId[i]);
-        }
-    }
 }
