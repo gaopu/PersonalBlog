@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.blog.utils.PageParam" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%>
@@ -11,22 +12,24 @@
 <body>
   <table>
     <thead>
-    <th>标题</th>
-    <th>阅读</th>
-    <th>评论</th>
-    <th>编辑</th>
-    <th>删除</th>
-    <th>分类</th>
+    <th width="20%">标题</th>
+    <th width="30%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;时间</th>
+    <th width="10%">阅读</th>
+    <th width="10%">评论</th>
+    <th width="10%">&nbsp;&nbsp;编辑</th>
+    <th width="10%">&nbsp;&nbsp;删除</th>
+    <th width="10%">&nbsp;&nbsp;分类</th>
     </thead>
     <tbody>
     <c:forEach items="${pageParamData}" var="article">
       <tr>
-        <th>${article.title}(${article.time})</th>
-        <th>${article.read_Num}</th>
-        <th>${article.comment_Num}</th>
-        <th>编辑</th>
-        <th><a onclick="dele(${article.id})" href="#">删除</a></th>
-        <th><a onclick="showMsg(${article.id})" href="#">分类</a></th>
+        <th width="20%">${article.title}</th>
+        <th width="30%"><fmt:formatDate value="${article.time}" pattern="yyyy年MM月dd日 HH:mm:ss"/></th>
+        <th width="10%">&nbsp;${article.read_Num}</th>
+        <th width="10%">&nbsp;${article.comment_Num}</th>
+        <th width="10%"><input type="button" value="编辑"></th>
+        <th width="10%"><input type="button" onclick="dele(${article.id})" value="删除"></th>
+        <th width="10%"><input type="button" onclick="showMsg(${article.id})" value="分类"></th>
       </tr>
     </c:forEach>
     </tbody>
@@ -40,7 +43,7 @@
     if(i == currPage){
 %><span style="background: #0000ff; padding: 0 5px; color: #ffffff";><%=currPage %></span><%
 }else{
-%><a href="getarticle?page=<%=i%>" style="padding: 0 5px"><%=i %></a><%
+%><a href="#" onclick="pageJump('getarticle?page=<%=i%>')" style="padding: 0 5px"><%=i %></a><%
     }
   }
 %>
@@ -82,8 +85,13 @@
 
     $.post("setCategory",{id:selectdId,b:b},function(success){
       if(success == "success"){
+        var t = document.getElementById("classify");
+        var inputs = t.getElementsByTagName("input");
+        var i;
+        for(i=0;i < inputs.length;i++){
+          inputs[i].checked=false;
+        }
         t.style.display="none";
-        location.reload();
       }
     })
   };
@@ -91,8 +99,12 @@
   //分类取消函数
   var cancle = function(){
     var t = document.getElementById("classify");
+    var inputs = t.getElementsByTagName("input");
+    var i;
     t.style.display="none";
-    location.reload();
+    for(i=0;i < inputs.length;i++){
+      inputs[i].checked=false;
+    }
   };
 
   //分类函数

@@ -27,6 +27,8 @@
 
     <link href="../css/screen.css" rel="stylesheet">
 
+    <link href="../css/background.css" rel="stylesheet">
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -37,10 +39,10 @@
 <body>
 <jsp:include page="../nav.jsp"/>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
+<div>
+    <div class="row" style="width: 100%;margin: 0;">
+        <div class="col-md-2" style="padding: 0">
+            <ul class="nav nav-sidebar" style="margin: 0">
                 <li id="articleLi" class="active"><a href="#">文章管理</a></li>
                 <li id="commentLi"><a href="#">评论管理</a></li>
                 <li id="configLi"><a href="#">博客配置</a></li>
@@ -48,76 +50,74 @@
                 <li id="deletedLi" ><a href="#">回收站</a></li>
             </ul>
         </div>
-        <div id="content" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-
-        </div>
+        <div id="content" class="col-md-10" style="height: 100%;background-color: #f7f7f7"></div>
     </div>
 </div>
+<%--<a href="#" onclick="PageJump('getcomment?page=1')" style="padding: 0 5px"><%=1%></a>--%>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="../js/bootstrap.min.js"></script>
 <script>
-    $(document).ready(function() {
+    //网页一进来就进入文章管理模块
+    $.get("getarticle?page=1",function(result){
+        $("#content").html(result);
+    });
 
-        //网页一进来就进入文章管理模块
-        $.get("getarticle?page=1",function(result){
+    //清空最上面的导航栏目的ul中所有li的class属性
+    $("ul.navbar-nav li").attr("class","");
+    $("#manageHome").attr("class","active");
+
+    function pageJump(requestUrl) {
+        $.get(requestUrl,function(result){
             $("#content").html(result);
         });
+    }
 
-        //清空最上面的导航栏目的ul中所有li的class属性
-        $("ul.navbar-nav li").attr("class","");
-        $("#manageHome").attr("class","active");
+    //传进来被点击的li的id
+    function clickList (id) {
+        //清空class=nav-sidebar的ul中所有li的class属性
+        $("ul.nav-sidebar li").attr("class","");
 
-        //传进来被点击的li的id
-        function clickList (id) {
-            //清空class=nav-sidebar的ul中所有li的class属性
-            $("ul.nav-sidebar li").attr("class","");
-
-            if (id == "categoryLi") {
-                $.get("category",function(result){
-                    $("#content").html(result);
-                });
-                $("#" + id).attr("class","active");
-            } else if (id == "deletedLi") {
-                $.get("deleted",function(result){
-                    $("#content").html(result);
-                });
-                $("#" + id).attr("class","active");
-            } else if (id == "configLi") {
-                $.get("configured",function(result){
-                    $("#content").html(result);
-                });
-                $("#" + id).attr("class","active");
-            } else if (id == "commentLi") {
-//                $.get("deleted",function(result){
-//                    $("#content").html(result);
-//                });
-                $("#" + id).attr("class","active");
-            } else if (id == "articleLi") {
-                $.get("getarticle?page=1",function(result){
-                    $("#content").html(result);
-                });
-                $("#" + id).attr("class","active");
-            }
+        if (id == "categoryLi") {
+            $.get("category",function(result){
+                $("#content").html(result);
+            });
+            $("#" + id).attr("class","active");
+        } else if (id == "deletedLi") {
+            $.get("deleted",function(result){
+                $("#content").html(result);
+            });
+            $("#" + id).attr("class","active");
+        } else if (id == "configLi") {
+            $.get("configured",function(result){
+                $("#content").html(result);
+            });
+            $("#" + id).attr("class","active");
+        } else if (id == "commentLi") {
+            $.get("getcomment?page=1",function(result){
+                $("#content").html(result);
+            });
+            $("#" + id).attr("class","active");
+        } else if (id == "articleLi") {
+            $.get("getarticle?page=1",function(result){
+                $("#content").html(result);
+            });
+            $("#" + id).attr("class","active");
         }
+    }
 
-        $("#categoryLi").click(function() {
-            clickList("categoryLi");
-        });
-        $("#deletedLi").click(function() {
-            clickList("deletedLi");
-        });
-        $("#configLi").click(function() {
-            clickList("configLi");
-        });
-        $("#commentLi").click(function() {
-            clickList("commentLi");
-        });
-        $("#articleLi").click(function() {
-            clickList("articleLi");
-        });
+    $("#categoryLi").click(function() {
+        clickList("categoryLi");
+    });
+    $("#deletedLi").click(function() {
+        clickList("deletedLi");
+    });
+    $("#configLi").click(function() {
+        clickList("configLi");
+    });
+    $("#commentLi").click(function() {
+        clickList("commentLi");
+    });
+    $("#articleLi").click(function() {
+        clickList("articleLi");
     });
 </script>
 </body>

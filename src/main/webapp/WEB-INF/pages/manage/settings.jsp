@@ -13,10 +13,10 @@
   <title>配置博客</title>
 </head>
 <body>
-<form action="setconfigure" method="post">
+<form action="setconfigure" method="post" id="set">
   <%Configure configure = (Configure) request.getAttribute("configured");%>
       博客标题<br>
-      <input type="text" name="head" value="<%=configure.getHead()%>"/><br><br>
+      <input id="blogNameInput" type="text" name="head" value="<%=configure.getHead()%>"/><br><br>
       博客描述<br>
       <input type="text" name="describ" value="<%=configure.getDescrib()%>"/><br><br>
       编辑器类型<br>
@@ -34,10 +34,16 @@
         有评论是否邮件通知<br>
       <input type="radio" name="isemail" value="0"/>否
       <input type="radio" name="isemail" value="1"/>是<br><br>
-      <input type="submit" value="保存设置">
+      <input type="button" onclick="sub()" value="保存设置">
+    <div id="msg"></div>
 </form>
 
 <script>
+   var sub = function(){
+       $.post("setconfigure",$("#set").serialize());
+       var newName = $("#blogNameInput").val();
+       $("#blogName").html(newName);
+   };
   //分别获取数据库中的值
     var edit_type = '<%=configure.getEdit_type()%>';
     var display_num = '<%=configure.getDisplay_num()%>';
