@@ -16,7 +16,7 @@
 
     <title>${title}</title>
     <link rel="icon" href="images/favicon.ico">
-    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/starter-template.css" rel="stylesheet">

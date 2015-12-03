@@ -18,7 +18,7 @@
     <!-- Custom styles for this template -->
     <link href="../css/starter-template.css" rel="stylesheet">
 
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="../css/screen.css" rel="stylesheet">
 
@@ -53,7 +53,7 @@
 <!-- 配置文件 -->
 <script type="text/javascript" src="../js/ueditor.config.js"></script>
 <!-- 编辑器源码文件 -->
-<script type="text/javascript" src="../js/ueditor.all.min.js"></script>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/ueditor/1.4.3.1/ueditor.all.js"></script>
 <!-- 实例化编辑器 -->
 <script type="text/javascript">
     var ue = UE.getEditor('editor');
