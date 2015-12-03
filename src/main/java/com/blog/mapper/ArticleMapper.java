@@ -12,6 +12,9 @@ public interface ArticleMapper {
     @Select("select * from article where id = #{id}")
     Article getArticle(int id);
 
+    @Select("select * from article")
+    List<Article> getAllArticle();
+
     @Insert("insert into article values(null,#{author_Id},#{title},#{time},#{read_Num},#{comment_Num},#{deleted})")
     void insert(Article article);
 

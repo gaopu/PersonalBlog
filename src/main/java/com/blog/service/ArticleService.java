@@ -12,6 +12,8 @@ import java.util.List;
  */
 public interface ArticleService {
 
+    List<Article> getAllArticle()throws IOException;
+
     int getAuthorId(int id) throws IOException;
 
     String getTitle(int id) throws IOException;

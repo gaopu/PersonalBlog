@@ -28,6 +28,17 @@ public class ArticleDaoImpl implements ArticleDao {
     }
 
     @Override
+    public List<Article> getAllArticle() throws IOException {
+        SqlSession session = MybatisUtils.getSession();
+        try {
+            ArticleMapper mapper = session.getMapper(ArticleMapper.class);
+            return mapper.getAllArticle();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
     public int getLatestId() throws IOException {
         SqlSession session = MybatisUtils.getSession();
         try {

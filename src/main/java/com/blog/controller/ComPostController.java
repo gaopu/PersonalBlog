@@ -1,5 +1,6 @@
 package com.blog.controller;
 
+import com.blog.dao.ArticleDaoImpl;
 import com.blog.po.Article;
 import com.blog.po.Comment;
 import com.blog.service.ArticleService;
@@ -13,6 +14,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +23,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by panlu on 15-10-22.
@@ -32,6 +36,8 @@ public class ComPostController {
     private CommentService commentService;
     @Autowired
     private ArticleService articleService;
+    @Autowired
+    private ArticleDaoImpl articleDao;
 
     @RequestMapping(value = "editcomment" ,method = RequestMethod.POST)
     public void editComment(HttpServletResponse respone, @RequestParam("id") String id, @RequestParam("content") String content, @RequestParam("user_name") String user_name, @RequestParam("user_email") String user_email) throws IOException{
@@ -39,6 +45,15 @@ public class ComPostController {
             respone.sendRedirect("article?id=" + id);
             return;
         }
+        //判断邮箱的正则表达式
+        String checkemail = "^([a-z0-9A-Z]+[-|_|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
+        Pattern regex = Pattern.compile(checkemail);
+        Matcher matcher = regex.matcher(user_email);
+        if (matcher.matches()==false){
+            respone.sendRedirect("article?id=" + id);
+            return;
+        }
+
         Integer idact = Integer.parseInt(id);
         Date curtime = new Date(System.currentTimeMillis());
         synchronized (ComPostController.class){
@@ -95,12 +110,13 @@ public class ComPostController {
     }
 
     @RequestMapping(value = "/manage/deletecomment", method = RequestMethod.POST)
-    public String setArticle(HttpServletRequest request)throws IOException{
-        String id = request.getParameter("delete");
-        int Iid = Integer.parseInt(id);
-        commentService.deleteReply(Iid);          //首先删除所有对该评论的回复再去删除评论
-        commentService.deleteCom(Iid);
-        return "manage/getcomment?page=1";
+    public @ResponseBody String setArticle(@RequestParam int id,@RequestParam int page,HttpServletRequest request)throws IOException{
+//        String Iid = request.getParameter("delete");
+//        int IDid = Integer.parseInt(id);
+//        System.out.println("delete: "+Iid);
+        commentService.deleteReply(id);          //首先删除所有对该评论的回复再去删除评论
+        commentService.deleteCom(id);
+        return "success";
     }
 
     @RequestMapping(value = "/manage/getcomment" ,method = RequestMethod.GET)
@@ -111,7 +127,7 @@ public class ComPostController {
         currPage = Integer.parseInt(currPageStr);
         int totlerow = commentService.getCommentRow();    //总数
         if (totlerow == 0){
-            return "manage/nullcomment";
+            return "manage/nocomment";
         }else {
             PageParam pgm = new PageParam(); //传过去的就是一个页面
             pgm.setRowCount(totlerow);
@@ -120,11 +136,13 @@ public class ComPostController {
             }
             pgm.setCurrPage(currPage);
             pgm = commentService.pageOfComment(pgm);
-            artlist = articleService.getCommonArticle();
+//            artlist = articleService.getCommonArticle();
+            artlist = articleService.getAllArticle();
             model.addAttribute("artlist",artlist);              //文章列表
             model.addAttribute("onepagedate", pgm.getDatacom());
-            request.setAttribute("pageParam",pgm);
+            request.setAttribute("pageParam", pgm);
+            List<Article> article = articleService.getDeletedArticle();
+            return "manage/comment";
         }
-        return "manage/comment";
     }
 }

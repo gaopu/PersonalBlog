@@ -2,6 +2,7 @@ package com.blog.service;
 
 import com.blog.po.Configure;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
@@ -13,5 +14,4 @@ public interface ConfigureService {
     Configure getConfigured() throws IOException;
     //设置博客配置
     void setConfigure(Configure configure) throws IOException;
-
 }
