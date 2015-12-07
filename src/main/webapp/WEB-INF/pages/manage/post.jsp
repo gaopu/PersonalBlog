@@ -85,7 +85,8 @@
         });
         var categoryIds = id_array.join(',');//将数组元素连接起来以构建一个字符串
         var title = $("#articleTitle").val();
-        var content = UE.getEditor('editor').getContent();
+        var content = ue.getContent();
+        var plainContent = ue.getContentTxt();
 
         $.ajax({
             type:"post",
@@ -93,7 +94,8 @@
             data:{
                 title:title,
                 categoryIds:categoryIds,
-                content:content
+                content:content,
+                plainContent:plainContent
             },
             success:function(result){
                 if (result == "success") {

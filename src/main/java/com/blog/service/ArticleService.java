@@ -41,9 +41,14 @@ public interface ArticleService {
     void recover(int articleId) throws IOException;
 
     //获取文章总记录数
-    public int getRowCount() throws IOException;
+    int getRowCount() throws IOException;
+
     //分页获得配置的文章
-    public PageParam getPagedArticle(PageParam pageParam) throws IOException;
+    PageParam getPagedArticle(PageParam pageParam) throws IOException;
+
     //设置文章分类
-    public void setCategory(int id, int[] selectedId) throws IOException;
+    void setCategory(int id, int[] selectedId) throws IOException;
+
+    //获取文章的预览
+    String getPeek(int id) throws IOException;
 }

@@ -212,4 +212,15 @@ public class ArticleDaoImpl implements ArticleDao {
         }
 
     }
+
+    @Override
+    public String getPeek(int id) throws IOException {
+        SqlSession sqlSession = MybatisUtils.getSession();
+        try {
+            ArticleMapper articleMapper = sqlSession.getMapper(ArticleMapper.class);
+            return articleMapper.getPeek(id);
+        }finally {
+            sqlSession.close();
+        }
+    }
 }

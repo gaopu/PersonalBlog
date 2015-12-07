@@ -49,7 +49,9 @@ public interface ArticleDao {
 
     List<Article> getPagedArticle(int offset, int size) throws IOException;
 
-    public void delCategory(int id) throws IOException;
+    void delCategory(int id) throws IOException;
 
-    public void setCategory(int id, int selectedId) throws IOException;
+    void setCategory(int id, int selectedId) throws IOException;
+
+    String getPeek(int id) throws IOException;
 }

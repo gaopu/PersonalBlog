@@ -134,4 +134,9 @@ public class ArticleServiceImpl implements ArticleService {
             articleDao.setCategory(id,selectedId[i]);
         }
     }
+
+    @Override
+    public String getPeek(int id) throws IOException {
+        return articleDao.getPeek(id);
+    }
 }

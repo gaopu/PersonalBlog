@@ -31,7 +31,7 @@
     <div class="starter-template">
         <div class="row">
             <div class="col-md-2"></div>
-            <div class="col-md-8" style="background-color: #ffffff;">
+            <div class="col-md-8" style="background-color: #ffffff;word-wrap: break-word">
                 <h1>${title}</h1><br>
                 <div>${content}</div><br/>
 
