@@ -54,4 +54,6 @@ public interface ArticleDao {
     void setCategory(int id, int selectedId) throws IOException;
 
     String getPeek(int id) throws IOException;
+
+    void increaseReadNum(String articleId) throws IOException;
 }

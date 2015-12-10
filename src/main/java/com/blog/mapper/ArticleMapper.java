@@ -60,4 +60,7 @@ public interface ArticleMapper {
 
     @Select("select peek from article where id=#{id}")
     String getPeek(int id);
+
+    @Update("update article set read_num = read_num + 1 where id = #{articleId}")
+    void increaseReadNum(String articleId);
 }

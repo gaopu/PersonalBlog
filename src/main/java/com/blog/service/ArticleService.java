@@ -3,6 +3,8 @@ package com.blog.service;
 import com.blog.po.Article;
 import com.blog.utils.PageParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -51,4 +53,7 @@ public interface ArticleService {
 
     //获取文章的预览
     String getPeek(int id) throws IOException;
+
+    //增加文章浏览量
+    void increasePageView(HttpSession session,String articleId) throws IOException;
 }
