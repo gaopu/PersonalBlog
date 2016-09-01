@@ -1,17 +1,17 @@
 package com.blog.controller;
 
 import com.blog.po.Article;
-import com.blog.po.ArticleCategory;
 import com.blog.po.Category;
 import com.blog.service.ArticleCategoryService;
 import com.blog.service.ArticleService;
 import com.blog.service.CategoryService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
