@@ -1,6 +1,6 @@
 package com.blog.service;
 
-import com.blog.dao.CommentDao;
+import com.blog.mapper.CommentMapper;
 import com.blog.po.Comment;
 import com.blog.utils.PageParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,70 +14,53 @@ import java.util.List;
  */
 @Service
 public class CommentServiceImpl implements CommentService {
-
     @Autowired
-    private CommentDao commentDao;
+    private CommentMapper commentMapper;
 
 
     @Override
     public void insertArt(Comment comm) throws IOException {
-        commentDao.insertArt(comm);
+        commentMapper.insertArt(comm);
     }
 
     @Override
     public void insertCom(Comment commPojo) throws IOException {
-        commentDao.insertCom(commPojo);
+        commentMapper.insertCom(commPojo);
     }
 
     @Override
     public List<Comment> selectCom(int article_id) throws IOException {
-        List<Comment> tempCom = commentDao.selectCom(article_id);
+        List<Comment> tempCom = commentMapper.selectCom(article_id);
         return tempCom;
     }
 
     @Override
     public List<Comment> selectRep(int article_id) throws IOException {
-        List<Comment> tempCom = commentDao.selectRep(article_id);
+        List<Comment> tempCom = commentMapper.selectRep(article_id);
         return tempCom;
     }
 
     @Override
     public List<Comment> selectAllCom() {
         List<Comment> allCom = null;
-        try {
-            allCom = commentDao.selectAllCom();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        allCom = commentMapper.selectAllCom();
         return allCom;
     }
 
     @Override
     public void deleteCom(int id) throws IOException{
-        try {
-            commentDao.deleteCom(id);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        commentMapper.deleteCom(id);
     }
 
     @Override
     public void deleteReply(int id) throws IOException {
-        try {
-            commentDao.deleteReply(id);
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+        commentMapper.deleteReply(id);
     }
 
     @Override
     public int getCommentRow() throws IOException {
         int row = 0;
-        try {
-            row = commentDao.getCommentRow();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+        row = commentMapper.getCommentRow();
         return row;
     }
 
@@ -87,7 +70,7 @@ public class CommentServiceImpl implements CommentService {
         int curpage = pageparam.getCurrPage();
         int offset = (curpage - 1) * PageParam.pageSize;
         int size = PageParam.pageSize;
-        List<Comment> onepagecomment = commentDao.getPageComment(offset,size);
+        List<Comment> onepagecomment = commentMapper.getPageComment(offset,size);
         pageparam.setDatacom(onepagecomment);
         return pageparam;
     }

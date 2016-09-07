@@ -1,6 +1,6 @@
 package com.blog.service;
 
-import com.blog.dao.AdminDao;
+import com.blog.mapper.AdminMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,30 +12,30 @@ import java.io.IOException;
 @Service
 public class AdminServiceImp implements AdminService {
     @Autowired
-    private AdminDao adminDao;
+    private AdminMapper adminMapper;
 
     @Override
     public boolean isCorrect(String email,String passwd) throws IOException {
-        return passwd.equals(adminDao.getPasswd(email));
+        return passwd.equals(adminMapper.getAdmin(email).getPasswd());
     }
 
     @Override
     public String getNickName(String email) throws IOException {
-        return adminDao.getNickName(email);
+        return adminMapper.getAdmin(email).getNickName();
     }
 
     @Override
     public String getNickName(int id) throws IOException {
-        return adminDao.getNickName(id);
+        return adminMapper.getAdminById(id).getNickName();
     }
 
     @Override
     public int getId(String email) throws IOException {
-        return adminDao.getId(email);
+        return adminMapper.getAdmin(email).getId();
     }
 
     @Override
     public String getPasswd(String email) throws IOException {
-        return adminDao.getPasswd(email);
+        return adminMapper.getAdmin(email).getPasswd();
     }
 }

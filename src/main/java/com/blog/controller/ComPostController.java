@@ -1,6 +1,5 @@
 package com.blog.controller;
 
-import com.blog.dao.ArticleDaoImpl;
 import com.blog.po.Article;
 import com.blog.po.Comment;
 import com.blog.service.ArticleService;
@@ -10,7 +9,6 @@ import com.blog.utils.PageParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,13 +30,10 @@ import java.util.regex.Pattern;
  */
 @Controller
 public class ComPostController {
-
     @Autowired
     private CommentService commentService;
     @Autowired
     private ArticleService articleService;
-    @Autowired
-    private ArticleDaoImpl articleDao;
 
     @RequestMapping(value = "editcomment" ,method = RequestMethod.POST)
     public void editComment(HttpServletResponse respone, @RequestParam("id") String id, @RequestParam("content") String content, @RequestParam("user_name") String user_name, @RequestParam("user_email") String user_email) throws IOException{

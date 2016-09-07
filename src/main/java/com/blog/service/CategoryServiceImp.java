@@ -1,6 +1,6 @@
 package com.blog.service;
 
-import com.blog.dao.CategoryDao;
+import com.blog.mapper.CategoryMapper;
 import com.blog.po.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,58 +13,57 @@ import java.util.List;
  */
 @Service
 public class CategoryServiceImp implements CategoryService {
-
     @Autowired
-    private CategoryDao categoryDao;
+    private CategoryMapper categoryMapper;
 
     @Override
     public String getName(int id) throws IOException {
-        return categoryDao.getName(id);
+        return categoryMapper.getName(id);
     }
 
     @Override
     public List<Category> getAll() throws IOException {
-        return categoryDao.getAll();
+        return categoryMapper.getAll();
     }
 
     @Override
     public int getArticleCountByCategoryId(int categoryId) throws IOException {
-        return categoryDao.getArticleCountByCategoryId(categoryId);
+        return categoryMapper.getArticleCountByCategoryId(categoryId);
     }
 
     @Override
     public boolean exist(String name) throws IOException {
-        return categoryDao.exist(name);
+        return categoryMapper.categoryCount(name) != 0;
     }
 
     @Override
     public void insert(Category category) throws IOException {
-        categoryDao.insert(category);
+        categoryMapper.insert(category);
     }
 
     @Override
     public void delete(String id) throws IOException {
-        categoryDao.delete(id);
+        categoryMapper.delete(id);
     }
 
     @Override
     public int getLatestId() throws IOException {
-        return categoryDao.getLatestId();
+        return categoryMapper.getLatestId();
     }
 
     @Override
     public void update(String id, String newName) throws IOException {
-        categoryDao.update(id,newName);
+        categoryMapper.update(id,newName);
     }
 
     @Override
     public List<Integer> getCategoryByArticleId(int id) throws IOException {
-        return categoryDao.getCategoryByArticleId(id);
+        return categoryMapper.getCategoryByArticleId(id);
     }
 
     @Override
     public List<String> getAllCategory() throws IOException {
-        return categoryDao.getAllCategory();
+        return categoryMapper.getAllCategory();
     }
 
 }

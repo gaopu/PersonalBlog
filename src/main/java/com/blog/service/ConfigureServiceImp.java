@@ -1,10 +1,10 @@
 package com.blog.service;
 
-import com.blog.dao.ConfigureDao;
+import com.blog.mapper.ConfigureMapper;
 import com.blog.po.Configure;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
@@ -13,14 +13,14 @@ import java.io.IOException;
  */
 @Service
 public class ConfigureServiceImp implements ConfigureService{
-    @Resource
-    ConfigureDao dao;
+    @Autowired
+    private ConfigureMapper configureMapper;
 
     public Configure getConfigured() throws IOException {
-        return dao.getConfigured();
+        return configureMapper.getConfigured();
     }
     public void setConfigure(HttpServletRequest request,Configure configure) throws IOException {
-        dao.setConfigure(configure);
+        configureMapper.setConfigure(configure);
         //确保导航栏显示的博客名称一直是最新的
         request.getServletContext().setAttribute("blogName",configure.getHead());
     }
