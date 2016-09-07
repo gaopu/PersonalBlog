@@ -45,7 +45,15 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
+    <!--扫描所有mapper-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.blog.mapper" />
+    </bean>
+
+    <!--将这个mapper单独列到这里是因为这个mapper需要在监听器中使用，但是监听器是在spring之前被加载初始化的
+    所以不能够使用spring进行自动的依赖注入，只能手动加载spring配置文件然后注入，手动注入就需要事先在这里配置了这个bean-->
+    <bean id="configureMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.blog.mapper.ConfigureMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
 </beans>

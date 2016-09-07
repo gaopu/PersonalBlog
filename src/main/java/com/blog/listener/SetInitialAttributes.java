@@ -1,7 +1,10 @@
 package com.blog.listener;
 
-import com.blog.dao.ConfigureDao;
-import com.blog.dao.ConfigureDaoImp;
+import com.blog.mapper.ConfigureMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -13,11 +16,9 @@ import java.io.IOException;
  * serlvetContext生命周期监听器
  * 获取一些配置，放置到context属性中
  */
+@Component
 @WebListener
 public class SetInitialAttributes implements ServletContextListener {
-
-    private ConfigureDao configureDao = new ConfigureDaoImp();
-
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         try {
@@ -29,7 +30,9 @@ public class SetInitialAttributes implements ServletContextListener {
     }
 
     private void setBlogName(ServletContextEvent servletContextEvent) throws IOException {
-        servletContextEvent.getServletContext().setAttribute("blogName",configureDao.getConfigured().getHead());
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring-mvc.xml");
+        ConfigureMapper configureMapper = (ConfigureMapper) applicationContext.getBean("configureMapper");
+        servletContextEvent.getServletContext().setAttribute("blogName",configureMapper.getConfigured().getHead());
     }
 
     @Override
