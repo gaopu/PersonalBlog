@@ -1,8 +1,8 @@
 package com.blog.controller;
 
 import com.blog.po.Article;
-import com.blog.po.Configure;
-import com.blog.service.*;
+import com.blog.service.AdminService;
+import com.blog.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
